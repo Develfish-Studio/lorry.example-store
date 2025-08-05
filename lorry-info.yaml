@@ -1,0 +1,21 @@
+name: develfish-repo.example-store
+luau:
+  aliases:
+    root: .
+actions:
+  generate/compose:
+    path: actions/generate-compose.luau
+  generate/spring:
+    path: actions/generate-spring.luau
+dependencies:
+  develfish-repo.utils:
+    uri: git@github.com:Develfish-Studio/develfish-repo.utils.git
+  develfish-repo.project:
+    uri: git@github.com:Develfish-Studio/develfish-repo.project.git
+  develfish-repo.project-compose:
+    uri: git@github.com:Develfish-Studio/develfish-repo.project-compose.git
+  develfish-repo.project-spring:
+    uri: git@github.com:Develfish-Studio/develfish-repo.project-spring.git
+targets:
+  '@':
+    path: .
