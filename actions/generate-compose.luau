@@ -1,9 +1,10 @@
 local Lorry = require("@develfish-repo.utils/lib/Lorry")
-local Project = require('@develfish-repo.utils/lib/Project')
+local Project = require('@develfish-repo.project/lib/Project')
 local Haproxy = require('@develfish-repo.project-compose/lib/Haproxy')
 local Postgres = require('@develfish-repo.project-compose/lib/Postgres')
 local Pgadmin = require('@develfish-repo.project-compose/lib/Pgadmin')
 local Keycloak = require('@develfish-repo.project-compose/lib/Keycloak')
+local Kafka = require('@develfish-repo.project-compose/lib/Kafka')
 local Minio = require('@develfish-repo.project-compose/lib/Minio')
 local Kcadm = require('@develfish-repo.project-compose/lib/Kcadm')
 local Mcli = require('@develfish-repo.project-compose/lib/Mcli')
@@ -133,9 +134,7 @@ Lorry:generate "@develfish-repo.project-compose/haproxy" {
 
 Lorry:generate "@develfish-repo.project-compose/kafka" {
   target = '@',
-  variables = {
-    project = project:unwrap_project()
-  }
+  variables = Kafka:from(project):unwrap()
 }
 
 Lorry:generate "@develfish-repo.project-compose/kafka-ui" {
