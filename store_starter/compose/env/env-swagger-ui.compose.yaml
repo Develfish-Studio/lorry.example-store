@@ -5,7 +5,7 @@ services:
     image: swaggerapi/swagger-ui
     restart: unless-stopped
     networks:
-      default: {}
+    - default
     environment:
       URL: ''
       CONFIG_URL: swagger-config.json
@@ -16,4 +16,3 @@ services:
     profiles:
     - env
     - app
-

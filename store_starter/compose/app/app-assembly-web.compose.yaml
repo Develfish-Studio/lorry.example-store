@@ -5,7 +5,12 @@ services:
     - env-postgres
     - env-keycloak
     - env-minio
-    image: store/assembly_web:1.0-SNAPSHOT
+    image: example/service-api:1.0-SNAPSHOT
+    links:
+    - env-haproxy:auth.local.example.com
+    restart: unless-stopped
+    networks:
+    - default
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://env-postgres:5432/app
       APP_OPENID_CLIENT_CLIENTID: api
@@ -24,11 +29,6 @@ services:
       APP_MINIO_CLIENT_SECRET_KEY: AZitoDkffcEYFYUmV4CGv1jr2fiXWIw4uSvdFlDu
       APP_MINIO_BUCKETS_0_NAME: app-public-document
       JAVA_OPTS: -Xmx512m -Xms256m
-    restart: unless-stopped
-    networks:
-      default: {}
-    links:
-    - env-haproxy:auth.local.example.com
     deploy:
       resources:
         limits:

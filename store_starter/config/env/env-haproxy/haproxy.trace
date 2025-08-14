@@ -3,11 +3,9 @@
   hostname: kafka-ui.local.example.com
   proxies:
   - servers:
-    - backup: false
+    - check: {}
       port: 8080
       hostname: env-kafka-ui
-      check: true
-      optional: false
     path: /
   port: 80
 - path: ''
@@ -15,11 +13,9 @@
   hostname: pgadmin.local.example.com
   proxies:
   - servers:
-    - backup: false
+    - check: {}
       port: 80
       hostname: env-pgadmin
-      check: true
-      optional: false
     path: /
   port: 80
 - path: ''
@@ -27,39 +23,19 @@
   hostname: swagger-ui.local.example.com
   proxies:
   - servers:
-    - backup: false
+    - check: {}
       port: 8080
       hostname: env-swagger-ui
-      check: true
-      optional: false
     path: /
-  port: 80
-- path: ''
-  name: auth_local_example_com
-  hostname: auth.local.example.com
-  proxies:
-  - servers:
-    - backup: false
-      port: 8080
-      hostname: env-keycloak
-      check: true
-      optional: false
-    path: /
-  redirect:
-    type: prefix
-    prefix: /auth
-    code: 301
   port: 80
 - path: ''
   name: minio_local_example_com
   hostname: minio.local.example.com
   proxies:
   - servers:
-    - backup: false
+    - check: {}
       port: 9000
       hostname: env-minio
-      check: true
-      optional: false
     path: /
   port: 80
 - path: ''
@@ -67,28 +43,39 @@
   hostname: minio-ui.local.example.com
   proxies:
   - servers:
-    - backup: false
+    - check: {}
       port: 9001
       hostname: env-minio
-      check: true
-      optional: false
     path: /
+  port: 80
+- path: ''
+  name: auth_local_example_com
+  hostname: auth.local.example.com
+  proxies:
+  - servers:
+    - check: {}
+      port: 8080
+      hostname: env-keycloak
+    path: /
+  redirect:
+    type: prefix
+    prefix: /auth
+    code: 301
   port: 80
 - path: ''
   name: admin_ui_local_example_com
   hostname: admin-ui.local.example.com
   proxies:
   - servers:
-    - backup: false
+    - check: {}
       port: 80
+      optional: true
       hostname: app-admin-ui
-      check: true
-      optional: true
     - backup: true
-      port: 5173
-      hostname: host.docker.internal
-      check: true
       optional: true
+      hostname: host.docker.internal
+      check: {}
+      port: 5173
     path: /
   port: 80
 - path: ''
@@ -96,88 +83,79 @@
   hostname: api.local.example.com
   proxies:
   - servers:
-    - backup: false
+    - check: {}
       port: 8080
+      optional: true
       hostname: app-assembly-web
-      check: true
-      optional: true
     - backup: true
-      port: 8080
-      hostname: host.docker.internal
-      check: true
       optional: true
+      hostname: host.docker.internal
+      check: {}
+      port: 8080
     path: /api/assembly_web
     cors:
       origin: '*'
   - servers:
-    - backup: false
+    - check: {}
       port: 8080
-      hostname: host.docker.internal
-      check: true
       optional: true
+      hostname: host.docker.internal
     path: /api/assembly_web
     cors:
       origin: '*'
   - servers:
-    - backup: false
+    - check: {}
       port: 8081
-      hostname: host.docker.internal
-      check: true
       optional: true
+      hostname: host.docker.internal
     path: /api/service_structure
     cors:
       origin: '*'
   - servers:
-    - backup: false
+    - check: {}
       port: 8082
-      hostname: host.docker.internal
-      check: true
       optional: true
+      hostname: host.docker.internal
     path: /api/service_catalog
     cors:
       origin: '*'
   - servers:
-    - backup: false
+    - check: {}
       port: 8083
-      hostname: host.docker.internal
-      check: true
       optional: true
+      hostname: host.docker.internal
     path: /api/service_profile
     cors:
       origin: '*'
   - servers:
-    - backup: false
+    - check: {}
       port: 8084
-      hostname: host.docker.internal
-      check: true
       optional: true
+      hostname: host.docker.internal
     path: /api/service_events
     cors:
       origin: '*'
   - servers:
-    - backup: false
+    - check: {}
       port: 8085
-      hostname: host.docker.internal
-      check: true
       optional: true
+      hostname: host.docker.internal
     path: /api/service_payments
     cors:
       origin: '*'
   - servers:
-    - backup: false
+    - check: {}
       port: 8086
-      hostname: host.docker.internal
-      check: true
       optional: true
+      hostname: host.docker.internal
     path: /api/service_security
     cors:
       origin: '*'
   - servers:
-    - backup: false
+    - check: {}
       port: 8087
-      hostname: host.docker.internal
-      check: true
       optional: true
+      hostname: host.docker.internal
     path: /api/service_uploads
     cors:
       origin: '*'

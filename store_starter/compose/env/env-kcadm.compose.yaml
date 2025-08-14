@@ -10,9 +10,8 @@ services:
       KEYCLOAK_ADMIN: admin
     user: root
     networks:
-      default: {}
+    - default
     restart: no
     entrypoint: /bin/bash /opt/scripts/bootstrap.sh
     profiles:
     - never
-

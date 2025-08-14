@@ -5,7 +5,7 @@ services:
     image: bitnami/keycloak:latest
     restart: unless-stopped
     networks:
-      default: {}
+    - default
     environment:
       KEYCLOAK_ENABLE_STATISTICS: 'false'
       KEYCLOAK_DATABASE_PORT: 5432
@@ -31,4 +31,3 @@ services:
     profiles:
     - env
     - app
-

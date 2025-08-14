@@ -1,0 +1,12 @@
+services:
+  app-admin-ui:
+    image: nginx:latest
+    restart: unless-stopped
+    networks:
+    - default
+    deploy:
+      resources:
+        limits:
+          memory: 600M
+    profiles:
+    - app

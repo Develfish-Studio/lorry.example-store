@@ -1,5 +1,3 @@
-volumes:
-  env-minio: {}
 services:
   env-minio:
     restart: unless-stopped
@@ -18,9 +16,8 @@ services:
     links:
     - env-haproxy:minio.local.example.com
     networks:
-      default: {}
+    - default
     deploy:
       resources:
         limits:
           memory: 250M
-

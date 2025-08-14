@@ -1,12 +1,10 @@
-volumes:
-  env-kafka: {}
 services:
   env-kafka:
     volumes:
     - env-kafka:/bitnami/kafka
     image: bitnami/kafka:3.5.1
     networks:
-      default: {}
+    - default
     restart: unless-stopped
     ports:
     - 9092:9092
@@ -31,4 +29,3 @@ services:
     profiles:
     - env
     - app
-

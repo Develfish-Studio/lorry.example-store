@@ -16,7 +16,7 @@ mc mb minio/app-product-image
 mc mb minio/app-product-image-variant
 mc mb minio/app-public-image
 mc mb minio/app-public-document
-mc mb minio/onec-employee-table
+mc mb minio/app-user-document
 
 mc anonymous set download minio/app-product-image
 mc anonymous set download minio/app-product-image-variant

@@ -1,13 +1,11 @@
-volumes:
-  env-postgres: {}
 services:
   env-postgres:
     volumes:
-    - ../../config/env/env-postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
     - env-postgres:/var/lib/postgresql/data
+    - ../../config/env/env-postgres/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
     image: postgres:14
     networks:
-      default: {}
+    - default
     restart: unless-stopped
     ports:
     - 5432:5432
@@ -21,4 +19,3 @@ services:
     profiles:
     - env
     - app
-

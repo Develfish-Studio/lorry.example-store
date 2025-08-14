@@ -5,7 +5,7 @@ services:
     image: provectuslabs/kafka-ui:master
     restart: unless-stopped
     networks:
-      default: {}
+    - default
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: env-kafka:29092
@@ -16,4 +16,3 @@ services:
     profiles:
     - env
     - admin
-
