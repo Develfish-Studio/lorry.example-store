@@ -1,12 +1,10 @@
 services:
   app-admin-ui:
-    image: nginx:latest
-    restart: unless-stopped
-    networks:
-    - default
     deploy:
       resources:
         limits:
-          memory: 600M
+          memory: 500M
+    image: store/admin_ui:1.0-SNAPSHOT
     profiles:
     - app
+    restart: unless-stopped

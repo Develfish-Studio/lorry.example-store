@@ -1,16 +1,18 @@
 services:
   env-mcli:
-    volumes:
-    - ../../config/env/env-mcli/scripts:/opt/scripts
-    image: bitnami/minio
-    environment:
-      MINIO_TARGET_SERVER: http://env-minio:9000
-      MINIO_SECRET_KEY: GfhjkmRfhjkm1
-      MINIO_ACCESS_KEY: admin
-    user: root
-    networks:
-      default: {}
-    restart: no
+    deploy:
+      resources:
+        limits:
+          memory: 1G
     entrypoint: /bin/bash /opt/scripts/bootstrap.sh
+    environment:
+      MINIO_ACCESS_KEY: admin
+      MINIO_SECRET_KEY: admin
+      MINIO_TARGET_SERVER: http://env-minio:9000
+    image: bitnami/minio
     profiles:
     - never
+    restart: no
+    user: root
+    volumes:
+    - ../../config/env/env-mcli/scripts:/opt/scripts

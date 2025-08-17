@@ -9,42 +9,52 @@ local Pgadmin = require('@develfish-repo.project-compose/lib/Pgadmin')
 local Keycloak = require('@develfish-repo.project-compose/lib/Keycloak')
 local Kafka = require('@develfish-repo.project-compose/lib/Kafka')
 local KafkaUi = require('@develfish-repo.project-compose/lib/KafkaUi')
-local Minio = require('@develfish-repo.project-compose/lib/Minio')
+local Minio = require('@develfish-repo.project-compose/lib/Minio/Minio')
 local Kcadm = require('@develfish-repo.project-compose/lib/Kcadm')
 local Mcli = require('@develfish-repo.project-compose/lib/Mcli')
-local App = require('@develfish-repo.project-compose/lib/App')
-local Spa = require('@develfish-repo.project-compose/lib/Spa')
+local SpringApp = require('@develfish-repo.project-compose/lib/SpringApp')
+local NginxSpa = require('@develfish-repo.project-compose/lib/NginxSpa')
 local SwaggerUi = require('@develfish-repo.project-compose/lib/SwaggerUi')
 
 local project = Project:from('store_starter')
 
 local datasource_keycloak = {
-  uri = 'jdbc:postgresql://env-postgres:5432/keycloak',
+  url = 'jdbc:postgresql://env-postgres:5432/keycloak',
   username = 'keycloak',
   password = 'keycloak'
 }
 
 local datasource_app = {
-  uri = 'jdbc:postgresql://env-postgres:5432/app',
+  url = 'jdbc:postgresql://env-postgres:5432/app',
   username = 'app',
   password = 'app'
 }
 
+local kafka_client = {
+  bootstrap_servers = 'env-kafka:29092',
+}
+
 local openid_client = {
+  url = 'http://env-keycloak:8080/auth',
   client_id = 'api',
   client_secret = '4Ggxc50xzu5j1qFk5rZ4OPHwvNFXLpNX'
 }
 
+local user_admin = {
+  username = 'admin@example.com',
+  password = 'GfhjkmRfhjkm1'
+}
+
 local minio_client = {
-  uri = 'http://env-minio:9000',
+  target_server = 'http://env-minio:9000',
   access_key = 'y5LeRZ84J4SsenpaIxMl',
   secret_key = 'AZitoDkffcEYFYUmV4CGv1jr2fiXWIw4uSvdFlDu'
 }
 
+local network_default = Compose.Network:from('default')
 local volume_kafka = Compose.Volume:from('env-kafka')
 local volume_postgres = Compose.Volume:from('env-postgres')
 local volume_minio = Compose.Volume:from('env-minio')
-local network_default = Compose.Network:from('default')
 
 Lorry:generate "@develfish-repo.project-compose/compose" {
   target = '@',
@@ -69,56 +79,79 @@ Lorry:generate "@develfish-repo.project-compose/compose" {
       volume_minio,
     }
 }
+-- [0, *):console.log("foo
+-- [0, *):console.log({ label: "("
+-- [0, *):console.log("bb
 
-Lorry:generate "@develfish-repo.project-compose/kafka" {
+-- kafka
+
+Lorry:generate "@develfish-repo.project-compose/containers/bitnami/kafka" {
   target = '@',
   variables = Kafka
     :from(project, "env-kafka")
-    :with_volume_ref(volume_kafka, "/bitnami/kafka")
-    :with_network(network_default)
+    :configure {
+      function(manifest) manifest
+        :with_volume_ref(volume_kafka, "/bitnami/kafka")
+      end
+    }
 }
 
-Lorry:generate "@develfish-repo.project-compose/kafka-ui" {
+Lorry:generate "@develfish-repo.project-compose/containers/provectuslabs/kafka-ui" {
   target = '@',
   variables = KafkaUi
     :from(project, "env-kafka-ui")
-    :with_depends_on "env-kafka"
-    :with_network(network_default)
+    :configure {
+      function(manifest) manifest
+        :with_depends_on("env-kafka")
+      end
+    }
 }
 
-Lorry:generate "@develfish-repo.project-compose/pgadmin" {
-  target = '@',
-  variables = Pgadmin
-    :from(project, "env-pgadmin")
-    :with_depends_on "env-postgres"
-    :with_datasource(datasource_keycloak)
-    :with_datasource(datasource_app)
-    :with_network(network_default)
-  }
-
-Lorry:generate "@develfish-repo.project-compose/postgres" {
+Lorry:generate "@develfish-repo.project-compose/containers/official/postgres" {
   target = '@',
   variables = Postgres
     :from(project, "env-postgres")
-    :with_volume_ref(volume_postgres, "/var/lib/postgresql/data")
-    :with_volume_source('../../config/env/env-postgres/docker-entrypoint-initdb.d/', '/docker-entrypoint-initdb.d/')
     :with_datasource(datasource_keycloak)
     :with_datasource(datasource_app)
-    :with_network(network_default)
+    :configure {
+      function (manifest) manifest
+        :with_volume_ref(volume_postgres, "/var/lib/postgresql/data")
+        :with_volume_source('../../config/env/env-postgres/docker-entrypoint-initdb.d/', '/docker-entrypoint-initdb.d/')
+      end
+    }
 }
 
-Lorry:generate "@develfish-repo.project-compose/keycloak" {
+Lorry:generate "@develfish-repo.project-compose/containers/dpage/pgadmin" {
+  target = '@',
+  variables = Pgadmin
+    :from(project, "env-pgadmin")
+    :with_datasource(datasource_keycloak)
+    :with_datasource(datasource_app)
+    :configure {
+      function (manifest) manifest
+        :with_depends_on("env-postgres")
+      end
+    }
+  }
+
+Lorry:generate "@develfish-repo.project-compose/containers/bitnami/keycloak" {
   target = '@',
   variables = Keycloak
-    :from(project, "env-keycloak", datasource_keycloak)
-    :with_depends_on "env-postgres"
-    :with_network(network_default)
+    :from(project, "env-keycloak")
+    :with_datasource(datasource_keycloak)
+    :with_admin(user_admin.username, user_admin.password)
+    :configure {
+      function (manifest) manifest
+        :with_depends_on("env-postgres")
+      end
+    }
 }
 
-Lorry:generate "@develfish-repo.project-compose/kcadm" {
+Lorry:generate "@develfish-repo.project-compose/containers/bitnami/kcadm" {
   target = '@',
   variables = Kcadm
     :from(project, "env-kcadm", "application")
+    :with_remote(openid_client.url, 'master', user_admin.username, user_admin.password)
     :with_client(openid_client)
     :with_realm_role 'admin'
     :with_realm_role 'support'
@@ -135,23 +168,26 @@ Lorry:generate "@develfish-repo.project-compose/kcadm" {
     :with_grant('group:admin', 'realm:admin')
     :with_grant('group:admin', 'realm:support')
     :with_grant('group:support', 'realm:support')
-    :with_volume_source('../../config/env/env-kcadm/scripts', '/opt/scripts')
-    :with_network(network_default)
 }
 
-Lorry:generate "@develfish-repo.project-compose/minio" {
+Lorry:generate "@develfish-repo.project-compose/containers/bitnami/minio" {
   target = '@',
   variables = Minio
     :from(project, "env-minio")
-    :with_volume_ref(volume_minio, '/bitnami/minio/data')
-    :with_link("env-haproxy", "minio.local.example.com")
-    :with_network(network_default)
+    :with_admin("admin", "admin")
+    :configure {
+      function (manifest) manifest
+        :with_volume_ref(volume_minio, '/bitnami/minio/data')
+        :with_link("env-haproxy", "minio.local.example.com")
+      end
+    }
 }
 
-Lorry:generate "@develfish-repo.project-compose/mcli" {
+Lorry:generate "@develfish-repo.project-compose/containers/bitnami/mcli" {
   target = '@',
   variables = Mcli
     :from(project, "env-mcli")
+    :with_remote(minio_client.target_server, "admin", "admin")
     :with_user('api', 'Qwerty123')
     :with_grant('api', 'readwrite')
     :with_key('api', minio_client.access_key, minio_client.secret_key)
@@ -175,38 +211,35 @@ Lorry:generate "@develfish-repo.project-compose/mcli" {
     }
 }
 
-Lorry:generate "@develfish-repo.project-compose/app" {
+Lorry:generate "@develfish-repo.project-compose/containers/official/spring-app" {
   target = '@',
-  variables = App
+  variables = SpringApp
     :from(project, 'app-assembly-web', 'store/assembly_web:1.0-SNAPSHOT')
-    :with_depends_on('env-kafka')
-    :with_depends_on('env-postgres')
-    :with_depends_on('env-keycloak')
-    :with_depends_on('env-minio')
     :with_spring_datasource(datasource_app)
-    :with_app_openid_client(openid_client)
-    :with_app_minio_client(minio_client)
-    :with_env_variable('JAVA_OPTS', '-Xmx512m -Xms256m')
-    :with_env_variable('SPRING_KAFKA_BOOTSTRAP_SERVERS', 'env-kafka:29092')
-    :with_env_variable('APP_MINIO_BUCKETS_0_NAME', 'app-public-document')
-    :with_env_variable('APP_MINIO_BUCKETS_1_NAME', 'app-public-image')
-    :with_env_variable('APP_MINIO_BUCKETS_1_UPLOAD_POLICY_CONTENT_TYPE', 'image/')
-    :with_env_variable('APP_MINIO_BUCKETS_1_UPLOAD_POLICY_CONTENT_LENGTH', '10M')
-    :with_env_variable('APP_MINIO_BUCKETS_2_NAME', 'app-product-image')
-    :with_env_variable('APP_MINIO_BUCKETS_2_UPLOAD_POLICY_CONTENT_TYPE', 'image/')
-    :with_env_variable('APP_MINIO_BUCKETS_2_UPLOAD_POLICY_CONTENT_LENGTH', '10M')
-    :with_link('env-haproxy:auth.local.example.com')
-    :with_network(network_default)
+    :with_spring_kafka(kafka_client)
+    :with_minio_client(minio_client)
+    :with_minio_bucket('app-public-document')
+    :with_minio_bucket('app-public-image', { content_type = 'image/', content_length = '10M' })
+    :with_minio_bucket('app-product-image', { content_type = 'image/', content_length = '10M' })
+    :configure {
+      function (manifest) manifest
+        :with_depends_on('env-kafka')
+        :with_depends_on('env-postgres')
+        :with_depends_on('env-keycloak')
+        :with_depends_on('env-minio')
+        :with_env_variable('JAVA_OPTS', '-Xmx512m -Xms256m')
+        :with_link('env-haproxy:auth.local.example.com')
+      end
+    }
 }
 
-Lorry:generate "@develfish-repo.project-compose/spa" {
+Lorry:generate "@develfish-repo.project-compose/containers/official/nginx-spa" {
   target = '@',
-  variables = Spa
+  variables = NginxSpa
     :from(project, 'app-admin-ui', 'store/admin_ui:1.0-SNAPSHOT')
-    :with_network(network_default)
 }
 
-Lorry:generate "@develfish-repo.project-compose/swagger-ui" {
+Lorry:generate "@develfish-repo.project-compose/containers/swaggerapi/swagger-ui" {
   target = '@',
   variables = SwaggerUi
     :from(project, "env-swagger-ui")
@@ -218,10 +251,9 @@ Lorry:generate "@develfish-repo.project-compose/swagger-ui" {
     :with_entry("Service Payments", "http://api.local.example.com/api/service_payments/v3/api-docs")
     :with_entry("Service Security", "http://api.local.example.com/api/service_security/v3/api-docs")
     :with_entry("Service Uploads", "http://api.local.example.com/api/service_uploads/v3/api-docs")
-    :with_network(network_default)
 }
 
-Lorry:generate "@develfish-repo.project-compose/haproxy" {
+Lorry:generate "@develfish-repo.project-compose/containers/official/haproxy" {
   target = '@',
   variables = Haproxy:from(project, "env-haproxy")
     :with_arrow('http://kafka-ui.local.example.com', 'http://env-kafka-ui:8080')

@@ -1,20 +1,18 @@
 services:
   env-pgadmin:
-    volumes:
-    - ../../config/env/env-pgadmin/servers.json:/pgadmin4/servers.json
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    restart: unless-stopped
-    networks:
-    - default
+    depends_on:
+    - env-postgres
     deploy:
       resources:
         limits:
-          memory: 250M
-    depends_on:
-    - env-postgres
+          memory: 500M
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    image: dpage/pgadmin4
     profiles:
     - env
     - admin
+    restart: unless-stopped
+    volumes:
+    - ../../config/env/env-pgadmin/servers.json:/pgadmin4/servers.json

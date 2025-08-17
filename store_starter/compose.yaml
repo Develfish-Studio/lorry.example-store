@@ -11,9 +11,9 @@ include:
 - path: compose/env/env-mcli.compose.yaml
 - path: compose/app/app-assembly-web.compose.yaml
 - path: compose/app/app-admin-ui.compose.yaml
-volumes:
-  env-postgres: {}
-  env-kafka: {}
-  env-minio: {}
 networks:
   default: {}
+volumes:
+  env-kafka: {}
+  env-minio: {}
+  env-postgres: {}

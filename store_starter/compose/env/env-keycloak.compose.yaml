@@ -2,32 +2,29 @@ services:
   env-keycloak:
     depends_on:
     - env-postgres
-    image: bitnami/keycloak:latest
-    restart: unless-stopped
-    networks:
-    - default
-    environment:
-      KEYCLOAK_ENABLE_STATISTICS: 'false'
-      KEYCLOAK_DATABASE_PORT: 5432
-      PROXY_ADDRESS_FORWARDING: 'true'
-      KEYCLOAK_HTTP_RELATIVE_PATH: /auth/
-      KEYCLOAK_CACHE_TYPE: local
-      KEYCLOAK_HTTP_PORT: 8080
-      KEYCLOAK_DATABASE_NAME: keycloak
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_PROXY: passthrough
-      KEYCLOAK_DATABASE_USER: keycloak
-      KEYCLOAK_DATABASE_HOST: env-postgres
-      KEYCLOAK_PRODUCTION: 'false'
-      KEYCLOAK_ADMIN_PASSWORD: GfhjkmRfhjkm1
-      KEYCLOAK_LOG_OUTPUT: default
-      KEYCLOAK_DATABASE_PASSWORD: keycloak
-      KEYCLOAK_ENABLE_HTTPS: 'false'
     deploy:
       resources:
         limits:
-          cpus: '1'
           memory: 1G
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KEYCLOAK_CACHE_TYPE: local
+      KEYCLOAK_DATABASE_HOST: postgres
+      KEYCLOAK_DATABASE_NAME: keycloak
+      KEYCLOAK_DATABASE_PASSWORD: keycloak
+      KEYCLOAK_DATABASE_PORT: '5432'
+      KEYCLOAK_DATABASE_USER: keycloak
+      KEYCLOAK_ENABLE_HTTPS: 'false'
+      KEYCLOAK_ENABLE_STATISTICS: 'false'
+      KEYCLOAK_HTTP_PORT: '8080'
+      KEYCLOAK_HTTP_RELATIVE_PATH: /auth/
+      KEYCLOAK_LOG_OUTPUT: default
+      KEYCLOAK_PRODUCTION: 'false'
+      KEYCLOAK_PROXY: passthrough
+      PROXY_ADDRESS_FORWARDING: 'true'
+    image: bitnami/keycloak:latest
     profiles:
     - env
     - app
+    restart: unless-stopped
