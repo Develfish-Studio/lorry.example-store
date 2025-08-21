@@ -1,20 +1,22 @@
 --!strict
-
+--#region Imports
 local Lorry = require("@develfish-repo.utils/lib/Lorry")
 local Project = require('@develfish-repo.project/lib/Project')
-local Compose = require('@develfish-repo.project-compose/lib/Compose')
-local Haproxy = require('@develfish-repo.project-compose/lib/Haproxy')
-local Postgres = require('@develfish-repo.project-compose/lib/Postgres')
-local Pgadmin = require('@develfish-repo.project-compose/lib/Pgadmin')
+local Compose = require('@develfish-repo.project-compose/lib/Compose/Compose')
+local Haproxy = require('@develfish-repo.project-compose/lib/Haproxy/Haproxy')
+local Postgres = require('@develfish-repo.project-compose/lib/Postgres/Postgres')
+local Pgadmin = require('@develfish-repo.project-compose/lib/Pgadmin/Pgadmin')
 local Keycloak = require('@develfish-repo.project-compose/lib/Keycloak')
 local Kafka = require('@develfish-repo.project-compose/lib/Kafka')
 local KafkaUi = require('@develfish-repo.project-compose/lib/KafkaUi')
 local Minio = require('@develfish-repo.project-compose/lib/Minio/Minio')
-local Kcadm = require('@develfish-repo.project-compose/lib/Kcadm')
-local Mcli = require('@develfish-repo.project-compose/lib/Mcli')
-local SpringApp = require('@develfish-repo.project-compose/lib/SpringApp')
+local Kcadm = require('@develfish-repo.project-compose/lib/Kcadm/Kcadm')
+local Mcli = require('@develfish-repo.project-compose/lib/Mcli/Mcli')
+local SpringApp = require('@develfish-repo.project-compose/lib/SpringApp/SpringApp')
 local NginxSpa = require('@develfish-repo.project-compose/lib/NginxSpa')
-local SwaggerUi = require('@develfish-repo.project-compose/lib/SwaggerUi')
+local SwaggerUi = require('@develfish-repo.project-compose/lib/SwaggerUi/SwaggerUi')
+local Make = require("@develfish-repo.project-compose/lib/Make/Make")
+--#endregion Imports
 
 local project = Project:from('store_starter')
 
@@ -56,6 +58,16 @@ local volume_kafka = Compose.Volume:from('env-kafka')
 local volume_postgres = Compose.Volume:from('env-postgres')
 local volume_minio = Compose.Volume:from('env-minio')
 
+-- make
+Lorry:generate "@develfish-repo.project-compose/make" {
+  target = '@',
+  variables = Make
+    :from(project)
+    :with_profile 'env'
+    :with_profile 'app'
+    :with_image("assembly_web", "app", "store")
+}
+
 Lorry:generate "@develfish-repo.project-compose/compose" {
   target = '@',
   variables = Compose
@@ -79,11 +91,6 @@ Lorry:generate "@develfish-repo.project-compose/compose" {
       volume_minio,
     }
 }
--- [0, *):console.log("foo
--- [0, *):console.log({ label: "("
--- [0, *):console.log("bb
-
--- kafka
 
 Lorry:generate "@develfish-repo.project-compose/containers/bitnami/kafka" {
   target = '@',
@@ -100,6 +107,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/provectuslabs/kafka-u
   target = '@',
   variables = KafkaUi
     :from(project, "env-kafka-ui")
+    :with_cluster("local", "env-kafka:29092")
     :configure {
       function(manifest) manifest
         :with_depends_on("env-kafka")
@@ -255,7 +263,8 @@ Lorry:generate "@develfish-repo.project-compose/containers/swaggerapi/swagger-ui
 
 Lorry:generate "@develfish-repo.project-compose/containers/official/haproxy" {
   target = '@',
-  variables = Haproxy:from(project, "env-haproxy")
+  variables = Haproxy
+    :from(project, "env-haproxy")
     :with_arrow('http://kafka-ui.local.example.com', 'http://env-kafka-ui:8080')
     :with_arrow('http://pgadmin.local.example.com', 'http://env-pgadmin:80')
     :with_arrow('http://swagger-ui.local.example.com', 'http://env-swagger-ui:8080')

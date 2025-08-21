@@ -8,8 +8,6 @@ services:
     extra_hosts:
     - host.docker.internal:host-gateway
     image: haproxy:alpine
-    networks:
-      default: null
     ports:
     - 80:80
     - 8404:8404
