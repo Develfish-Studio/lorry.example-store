@@ -225,7 +225,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/bitnami/mcli" {
 Lorry:generate "@develfish-repo.project-compose/containers/official/spring-app" {
   target = '@',
   variables = SpringApp
-    :from(project, 'app-assembly-web', 'store/assembly_web:1.0-SNAPSHOT')
+    :from(project, 'app-assembly-web', 'store/assembly_web:1.0.0-SNAPSHOT')
     :with_spring_datasource(datasource_app)
     :with_spring_kafka(kafka_client)
     :with_minio_client(minio_client)
@@ -247,7 +247,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/official/spring-app" 
 Lorry:generate "@develfish-repo.project-compose/containers/official/nginx-spa" {
   target = '@',
   variables = NginxSpa
-    :from(project, 'app-admin-ui', 'store/admin_ui:1.0-SNAPSHOT')
+    :from(project, 'app-admin-ui', 'store/admin_ui:1.0.0-SNAPSHOT')
 }
 
 Lorry:generate "@develfish-repo.project-compose/containers/swaggerapi/swagger-ui" {

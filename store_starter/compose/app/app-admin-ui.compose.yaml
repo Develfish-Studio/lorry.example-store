@@ -4,7 +4,7 @@ services:
       resources:
         limits:
           memory: 500M
-    image: store/admin_ui:1.0-SNAPSHOT
+    image: store/admin_ui:1.0.0-SNAPSHOT
     profiles:
     - app
     restart: unless-stopped

@@ -14,5 +14,5 @@ build:
 
 build/app/assembly_web:
 	docker build \
-	  --tag store/assembly_web:1.0-SNAPSHOT \
+	  --tag store/assembly_web:1.0.0-SNAPSHOT \
 	  .

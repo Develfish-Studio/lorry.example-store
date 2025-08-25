@@ -25,7 +25,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://env-postgres:5432/app
       SPRING_DATASOURCE_USERNAME: app
       SPRING_KAFKA_BOOTSTRAP_SERVERS: env-kafka:29092
-    image: store/assembly_web:1.0-SNAPSHOT
+    image: store/assembly_web:1.0.0-SNAPSHOT
     links:
     - env-haproxy:auth.local.example.com
     profiles:
