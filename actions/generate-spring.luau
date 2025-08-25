@@ -1,51 +1,48 @@
--- return require "./test"
-
-print "Hello from lua!"
--- print(require)
-
--- local lorry = require("@develfish-repo.core/lorry")
-
--- local test = require('/home/ipavlenko/Projects/Develfish/develfish-root/develfish-example/store/generate/test.luau')
+--!strict
+--#region Imports
+local Lorry = require("@develfish-repo.utils/lib/Lorry")
+-- local Project = require('@develfish-repo.project/lib/Project')
 -- local projects = require('./spring/projects')
-
--- local poms = require('./spring/poms')
--- local profiles = require('../local/definitions/profiles')
--- local modules = require('../local/definitions/modules')
+local roots = require('./spring/roots')
+local profiles = require('./spring/profiles')
+local modules = require('./spring/modules')
 -- local dockerfiles = require('../local/definitions/dockerfiles')
 -- local units = require('../local/definitions/units')
 -- local exchanges = require('../local/definitions/exchanges')
 -- local projections = require('../local/definitions/projections')
--- local assemblies = require('../local/definitions/assemblies')
+local assemblies = require('./spring/assemblies')
 -- local listeners = require('../local/definitions/listeners')
 -- local resources = require('../local/definitions/resources')
 -- local statements = require('../local/definitions/statements')
+local Module = require('@develfish-repo.project-spring/lib/Module/Module')
+--#endregion Imports
 
--- Generate Projects
--- for _, pom in poms do
---   lorry.generate "@/project" { target = '@store', variables = pom:unwrap() }
--- end
+for _, root in roots do
+  Lorry:generate "@develfish-repo.project-spring/root" { target = '@', variables = root }
+end
 
 -- -- Generate Build Scripts
 -- for _, docker in dockerfiles do
 --   lorry.generate "@/docker" { target = '@store', variables = docker:unwrap() }
 -- end
 
--- -- Generate Assemblies
--- for _, assembly in assemblies do
---   lorry.generate "@/assembly" { target = '@store', variables = assembly:unwrap() }
--- end
+-- Generate Assemblies
+for _, assembly in assemblies do
+  Lorry:generate "@develfish-repo.project-spring/assembly" { target = '@', variables = assembly }
+end
 
--- -- Generate Modules
--- for _, item in modules do
---   if item.kind == 'web' then
---     lorry.generate "@/module_web" { target = '@store', variables = item:unwrap() }
---   elseif item.kind == 'lib' then
---     lorry.generate "@/module_lib" { target = '@store', variables = item:unwrap() }
---   elseif item.kind == 'gateway' then
---     lorry.generate "@/module_web" { target = '@store', variables = item:unwrap() }
---   elseif item.kind == 'security' then
---     lorry.generate "@/module_security" { target = '@store', variables = item:unwrap() }
---   elseif item.kind == 'uploads' then
---     lorry.generate "@/module_uploads" { target = '@store', variables = item:unwrap() }
---   end
--- end
+-- Generate Modules
+for _, module in modules do
+  local item = module::Module.Module
+  if item.kind == 'web' then
+    Lorry:generate "@develfish-repo.project-spring/module_web" { target = '@', variables = item }
+  elseif item.kind == 'lib' then
+    Lorry:generate "@develfish-repo.project-spring/module_lib" { target = '@', variables = item }
+  elseif item.kind == 'gateway' then
+    Lorry:generate "@develfish-repo.project-spring/module_web" { target = '@', variables = item }
+  elseif item.kind == 'security' then
+    Lorry:generate "@develfish-repo.project-spring/module_security" { target = '@', variables = item }
+  elseif item.kind == 'uploads' then
+    Lorry:generate "@develfish-repo.project-spring/module_uploads" { target = '@', variables = item }
+  end
+end

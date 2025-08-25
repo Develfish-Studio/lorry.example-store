@@ -16,38 +16,41 @@ local SpringApp = require('@develfish-repo.project-compose/lib/SpringApp/SpringA
 local NginxSpa = require('@develfish-repo.project-compose/lib/NginxSpa')
 local SwaggerUi = require('@develfish-repo.project-compose/lib/SwaggerUi/SwaggerUi')
 local Make = require("@develfish-repo.project-compose/lib/Make/Make")
+local PropTypes = require('@develfish-repo.project/lib/PropTypes')
 --#endregion Imports
 
 local project = Project:from('store_starter')
 
-local datasource_keycloak = {
+local datasource_keycloak: PropTypes.Datasource = {
   url = 'jdbc:postgresql://env-postgres:5432/keycloak',
   username = 'keycloak',
   password = 'keycloak'
 }
 
-local datasource_app = {
+local datasource_app: PropTypes.Datasource = {
   url = 'jdbc:postgresql://env-postgres:5432/app',
   username = 'app',
   password = 'app'
 }
 
-local kafka_client = {
+local kafka_client: PropTypes.KafkaRemote = {
   bootstrap_servers = 'env-kafka:29092',
 }
 
-local openid_client = {
+local openid_client: PropTypes.OpenidRemote = {
   url = 'http://env-keycloak:8080/auth',
   client_id = 'api',
-  client_secret = '4Ggxc50xzu5j1qFk5rZ4OPHwvNFXLpNX'
+  client_secret = '4Ggxc50xzu5j1qFk5rZ4OPHwvNFXLpNX',
+  issuer_uri = 'http://auth.local.example.com/auth/realms/application',
+  redirect_uri = '{referer}/auth/callback',
 }
 
-local user_admin = {
+local user_admin: PropTypes.Credentials = {
   username = 'admin@example.com',
   password = 'GfhjkmRfhjkm1'
 }
 
-local minio_client = {
+local minio_client: PropTypes.MinioRemote = {
   target_server = 'http://env-minio:9000',
   access_key = 'y5LeRZ84J4SsenpaIxMl',
   secret_key = 'AZitoDkffcEYFYUmV4CGv1jr2fiXWIw4uSvdFlDu'
@@ -195,7 +198,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/bitnami/mcli" {
   target = '@',
   variables = Mcli
     :from(project, "env-mcli")
-    :with_remote(minio_client.target_server, "admin", "admin")
+    :with_target(minio_client.target_server, "admin", "admin")
     :with_user('api', 'Qwerty123')
     :with_grant('api', 'readwrite')
     :with_key('api', minio_client.access_key, minio_client.secret_key)

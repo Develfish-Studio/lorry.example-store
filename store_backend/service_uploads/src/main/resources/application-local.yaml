@@ -1,0 +1,19 @@
+app:
+  minio:
+    buckets:
+    - name: app-public-document
+    - name: app-public-image
+      upload_policy:
+        content_length: 10M
+        content_type: image/
+    - name: app-product-image
+      upload_policy:
+        content_length: 10M
+        content_type: image/
+    client:
+      access-key: y5LeRZ84J4SsenpaIxMl
+      endpoint: http://minio.local.example.com
+      secret-key: AZitoDkffcEYFYUmV4CGv1jr2fiXWIw4uSvdFlDu
+server:
+  port: 8087
+spring: {}

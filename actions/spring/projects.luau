@@ -1,11 +1,13 @@
--- local Meta = require('@develfish-repo.core/Meta')
--- local Project = require('@develfish-repo.core/Project')
+--!strict
 
--- local projects: {[string]: Project.Project} = Meta:table {}
+local Meta = require('@develfish-repo.utils/lib/Meta')
+local Project = require('@develfish-repo.project/lib/Project')
 
--- projects.project = Project:from('store_backend')
--- projects.project_ddl = Project:from('store_migrate')
+local projects = Meta:table {}
 
--- return projects
+export type Projects = typeof(projects)
 
-return {}
+projects.project = Project:from('store_backend')
+projects.project_ddl = Project:from('store_migrate')
+
+return projects

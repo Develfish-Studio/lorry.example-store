@@ -1,0 +1,9 @@
+server:
+  port: 8083
+spring:
+  datasource:
+    password: app
+    url: jdbc:postgresql://localhost:5432/app
+    username: app
+  jpa:
+    show-sql: true

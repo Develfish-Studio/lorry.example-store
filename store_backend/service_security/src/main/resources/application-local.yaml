@@ -1,0 +1,10 @@
+app:
+  openid:
+    client:
+      client-id: api
+      client-secret: 4Ggxc50xzu5j1qFk5rZ4OPHwvNFXLpNX
+      issuer-uri: http://auth.local.example.com/auth/realms/application
+      redirect-uri: '{referer}/auth/callback'
+server:
+  port: 8086
+spring: {}
