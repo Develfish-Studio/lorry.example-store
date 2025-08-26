@@ -12,7 +12,7 @@ local exchanges = require('./spring/exchanges')
 -- local projections = require('../local/definitions/projections')
 local assemblies = require('./spring/assemblies')
 -- local listeners = require('../local/definitions/listeners')
--- local resources = require('../local/definitions/resources')
+local resources = require('./spring/resources')
 -- local statements = require('../local/definitions/statements')
 local Module = require('@develfish-repo.project-spring/lib/Module/Module')
 --#endregion Imports
@@ -57,10 +57,10 @@ for _, unit in units do
   Lorry:generate "@develfish-repo.project-spring/unit" { target = '@', variables = unit }
 end
 
--- -- Generate Resources
--- for _, resource in resources do
---   Lorry:generate "@develfish-repo.project-spring/resource" { target = '@', variables = resource }
--- end
+-- Generate Resources
+for _, resource in resources do
+  Lorry:generate "@develfish-repo.project-spring/resource" { target = '@', variables = resource }
+end
 
 -- -- Generate Listeners
 -- for _, listener in listeners do
