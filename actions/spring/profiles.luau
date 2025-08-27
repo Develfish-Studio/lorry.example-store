@@ -1,8 +1,8 @@
 --!strict
 
-local Meta = require('@develfish-repo.utils/lib/Meta')
-local PropTypes = require('@develfish-repo.project/lib/PropTypes')
-local Profile = require('@develfish-repo.project-spring/lib/Profile/Profile')
+local Meta = require('@lorry.utils/lib/Meta')
+local PropTypes = require('@lorry.project/lib/PropTypes')
+local Profile = require('@lorry.project-spring/lib/Profile/Profile')
 
 local profiles = Meta:table {}
 

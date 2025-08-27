@@ -1,6 +1,6 @@
-local Projection = require('@develfish-repo.project-spring/lib/Resource/Projection')
-local Action = require('@develfish-repo.project-spring/lib/Resource/Action')
-local Auth = require('@develfish-repo.project-spring/lib/Resource/Auth')
+local Projection = require('@lorry.project-spring/lib/Resource/Projection')
+local Action = require('@lorry.project-spring/lib/Resource/Action')
+local Auth = require('@lorry.project-spring/lib/Resource/Auth')
 
 local units = require('./units')
 

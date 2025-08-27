@@ -1,6 +1,6 @@
 --!strict
 
-local Resource = require('@develfish-repo.project-spring/lib/Resource/Resource')
+local Resource = require('@lorry.project-spring/lib/Resource/Resource')
 
 local projections = require('./projections')
 local units = require('./units')

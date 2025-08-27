@@ -1,4 +1,4 @@
-local Module = require('@develfish-repo.project-spring/lib/Module')
+local Module = require('@lorry.project-spring/lib/Module')
 
 local roots = require('./roots')
 local profiles = require('./profiles')

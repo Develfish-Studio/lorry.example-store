@@ -1,6 +1,6 @@
 --!strict
 
-local Listener = require('@develfish-repo.project-spring/lib/Exchange/Listener')
+local Listener = require('@lorry.project-spring/lib/Exchange/Listener')
 
 local modules = require('./modules')
 

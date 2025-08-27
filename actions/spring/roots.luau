@@ -1,7 +1,7 @@
 --!strict
 
-local Meta = require('@develfish-repo.utils/lib/Meta')
-local POM = require('@develfish-repo.project-spring/lib/POM')
+local Meta = require('@lorry.utils/lib/Meta')
+local POM = require('@lorry.project-spring/lib/POM')
 
 local projects = require('./projects')
 

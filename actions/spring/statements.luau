@@ -1,4 +1,4 @@
-local DDL = require('@develfish-repo.project-spring/lib/DDL')
+local DDL = require('@lorry.project-spring/lib/DDL')
 
 local projects = require('./projects')
 local units = require('./units')

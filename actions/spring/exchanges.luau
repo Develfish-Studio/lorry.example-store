@@ -1,7 +1,7 @@
 --!strict
 
-local Exchange = require('@develfish-repo.project-spring/lib/Exchange/Exchange')
-local Topic = require('@develfish-repo.project-spring/lib/Exchange/Topic')
+local Exchange = require('@lorry.project-spring/lib/Exchange/Exchange')
+local Topic = require('@lorry.project-spring/lib/Exchange/Topic')
 
 local modules = require('./modules')
 

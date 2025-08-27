@@ -1,10 +1,10 @@
 --!strict
 
-local Unit = require('@develfish-repo.project-spring/lib/Unit/Unit')
-local PK = require('@develfish-repo.project-spring/lib/Unit/Entity/PK')
-local Prop = require('@develfish-repo.project-spring/lib/Unit/Entity/Prop')
-local Ref = require('@develfish-repo.project-spring/lib/Unit/Entity/Ref')
-local Formula = require('@develfish-repo.project-spring/lib/Unit/Entity/Formula')
+local Unit = require('@lorry.project-spring/lib/Unit/Unit')
+local PK = require('@lorry.project-spring/lib/Unit/Entity/PK')
+local Prop = require('@lorry.project-spring/lib/Unit/Entity/Prop')
+local Ref = require('@lorry.project-spring/lib/Unit/Entity/Ref')
+local Formula = require('@lorry.project-spring/lib/Unit/Entity/Formula')
 
 local modules = require('./modules')
 

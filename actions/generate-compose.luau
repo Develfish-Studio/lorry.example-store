@@ -1,22 +1,22 @@
 --!strict
 --#region Imports
-local Lorry = require("@develfish-repo.utils/lib/Lorry")
-local Project = require('@develfish-repo.project/lib/Project')
-local Compose = require('@develfish-repo.project-compose/lib/Compose/Compose')
-local Haproxy = require('@develfish-repo.project-compose/lib/Haproxy/Haproxy')
-local Postgres = require('@develfish-repo.project-compose/lib/Postgres/Postgres')
-local Pgadmin = require('@develfish-repo.project-compose/lib/Pgadmin/Pgadmin')
-local Keycloak = require('@develfish-repo.project-compose/lib/Keycloak')
-local Kafka = require('@develfish-repo.project-compose/lib/Kafka')
-local KafkaUi = require('@develfish-repo.project-compose/lib/KafkaUi')
-local Minio = require('@develfish-repo.project-compose/lib/Minio/Minio')
-local Kcadm = require('@develfish-repo.project-compose/lib/Kcadm/Kcadm')
-local Mcli = require('@develfish-repo.project-compose/lib/Mcli/Mcli')
-local SpringApp = require('@develfish-repo.project-compose/lib/SpringApp/SpringApp')
-local NginxSpa = require('@develfish-repo.project-compose/lib/NginxSpa')
-local SwaggerUi = require('@develfish-repo.project-compose/lib/SwaggerUi/SwaggerUi')
-local Make = require("@develfish-repo.project-compose/lib/Make/Make")
-local PropTypes = require('@develfish-repo.project/lib/PropTypes')
+local Lorry = require("@lorry.utils/lib/Lorry")
+local Project = require('@lorry.project/lib/Project')
+local Compose = require('@lorry.project-compose/lib/Compose/Compose')
+local Haproxy = require('@lorry.project-compose/lib/Haproxy/Haproxy')
+local Postgres = require('@lorry.project-compose/lib/Postgres/Postgres')
+local Pgadmin = require('@lorry.project-compose/lib/Pgadmin/Pgadmin')
+local Keycloak = require('@lorry.project-compose/lib/Keycloak')
+local Kafka = require('@lorry.project-compose/lib/Kafka')
+local KafkaUi = require('@lorry.project-compose/lib/KafkaUi')
+local Minio = require('@lorry.project-compose/lib/Minio/Minio')
+local Kcadm = require('@lorry.project-compose/lib/Kcadm/Kcadm')
+local Mcli = require('@lorry.project-compose/lib/Mcli/Mcli')
+local SpringApp = require('@lorry.project-compose/lib/SpringApp/SpringApp')
+local NginxSpa = require('@lorry.project-compose/lib/NginxSpa')
+local SwaggerUi = require('@lorry.project-compose/lib/SwaggerUi/SwaggerUi')
+local Make = require("@lorry.project-compose/lib/Make/Make")
+local PropTypes = require('@lorry.project/lib/PropTypes')
 --#endregion Imports
 
 local project = Project:from('store_starter')
@@ -62,7 +62,7 @@ local volume_postgres = Compose.Volume:from('env-postgres')
 local volume_minio = Compose.Volume:from('env-minio')
 
 -- make
-Lorry:generate "@develfish-repo.project-compose/make" {
+Lorry:generate "@lorry.project-compose/make" {
   target = '@',
   variables = Make
     :from(project)
@@ -71,7 +71,7 @@ Lorry:generate "@develfish-repo.project-compose/make" {
     :with_image("assembly_web", "app", "store")
 }
 
-Lorry:generate "@develfish-repo.project-compose/compose" {
+Lorry:generate "@lorry.project-compose/compose" {
   target = '@',
   variables = Compose
     :from(project)
@@ -95,7 +95,7 @@ Lorry:generate "@develfish-repo.project-compose/compose" {
     }
 }
 
-Lorry:generate "@develfish-repo.project-compose/containers/bitnami/kafka" {
+Lorry:generate "@lorry.project-compose/containers/bitnami/kafka" {
   target = '@',
   variables = Kafka
     :from(project, "env-kafka")
@@ -106,7 +106,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/bitnami/kafka" {
     }
 }
 
-Lorry:generate "@develfish-repo.project-compose/containers/provectuslabs/kafka-ui" {
+Lorry:generate "@lorry.project-compose/containers/provectuslabs/kafka-ui" {
   target = '@',
   variables = KafkaUi
     :from(project, "env-kafka-ui")
@@ -118,7 +118,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/provectuslabs/kafka-u
     }
 }
 
-Lorry:generate "@develfish-repo.project-compose/containers/official/postgres" {
+Lorry:generate "@lorry.project-compose/containers/official/postgres" {
   target = '@',
   variables = Postgres
     :from(project, "env-postgres")
@@ -132,7 +132,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/official/postgres" {
     }
 }
 
-Lorry:generate "@develfish-repo.project-compose/containers/dpage/pgadmin" {
+Lorry:generate "@lorry.project-compose/containers/dpage/pgadmin" {
   target = '@',
   variables = Pgadmin
     :from(project, "env-pgadmin")
@@ -145,7 +145,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/dpage/pgadmin" {
     }
   }
 
-Lorry:generate "@develfish-repo.project-compose/containers/bitnami/keycloak" {
+Lorry:generate "@lorry.project-compose/containers/bitnami/keycloak" {
   target = '@',
   variables = Keycloak
     :from(project, "env-keycloak")
@@ -158,7 +158,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/bitnami/keycloak" {
     }
 }
 
-Lorry:generate "@develfish-repo.project-compose/containers/bitnami/kcadm" {
+Lorry:generate "@lorry.project-compose/containers/bitnami/kcadm" {
   target = '@',
   variables = Kcadm
     :from(project, "env-kcadm", "application")
@@ -181,7 +181,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/bitnami/kcadm" {
     :with_grant('group:support', 'realm:support')
 }
 
-Lorry:generate "@develfish-repo.project-compose/containers/bitnami/minio" {
+Lorry:generate "@lorry.project-compose/containers/bitnami/minio" {
   target = '@',
   variables = Minio
     :from(project, "env-minio")
@@ -194,7 +194,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/bitnami/minio" {
     }
 }
 
-Lorry:generate "@develfish-repo.project-compose/containers/bitnami/mcli" {
+Lorry:generate "@lorry.project-compose/containers/bitnami/mcli" {
   target = '@',
   variables = Mcli
     :from(project, "env-mcli")
@@ -222,7 +222,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/bitnami/mcli" {
     }
 }
 
-Lorry:generate "@develfish-repo.project-compose/containers/official/spring-app" {
+Lorry:generate "@lorry.project-compose/containers/official/spring-app" {
   target = '@',
   variables = SpringApp
     :from(project, 'app-assembly-web', 'store/assembly_web:1.0.0-SNAPSHOT')
@@ -244,13 +244,13 @@ Lorry:generate "@develfish-repo.project-compose/containers/official/spring-app" 
     }
 }
 
-Lorry:generate "@develfish-repo.project-compose/containers/official/nginx-spa" {
+Lorry:generate "@lorry.project-compose/containers/official/nginx-spa" {
   target = '@',
   variables = NginxSpa
     :from(project, 'app-admin-ui', 'store/admin_ui:1.0.0-SNAPSHOT')
 }
 
-Lorry:generate "@develfish-repo.project-compose/containers/swaggerapi/swagger-ui" {
+Lorry:generate "@lorry.project-compose/containers/swaggerapi/swagger-ui" {
   target = '@',
   variables = SwaggerUi
     :from(project, "env-swagger-ui")
@@ -264,7 +264,7 @@ Lorry:generate "@develfish-repo.project-compose/containers/swaggerapi/swagger-ui
     :with_entry("Service Uploads", "http://api.local.example.com/api/service_uploads/v3/api-docs")
 }
 
-Lorry:generate "@develfish-repo.project-compose/containers/official/haproxy" {
+Lorry:generate "@lorry.project-compose/containers/official/haproxy" {
   target = '@',
   variables = Haproxy
     :from(project, "env-haproxy")

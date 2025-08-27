@@ -1,11 +1,11 @@
-name: develfish-repo.example-store
+name: lorry.example-store
 displayName: Example Store
 version: 0.0.0
 description: Develfish Studio and Develfish Lorry showcase
 author: Igor Pavlenko
 publisher: Igor Pavlenko
 license: DEVELFISH-1.0-or-later OR GPL-3.0-or-later
-homepage: https://github.com/Develfish-Studio/develfish-repo.example-store
+homepage: https://github.com/Develfish-Studio/lorry.example-store
 categories:
   - example
 keywords:
@@ -21,14 +21,14 @@ actions:
   generate/spring:
     path: actions/generate-spring.luau
 dependencies:
-  develfish-repo.utils:
-    uri: git@github.com:Develfish-Studio/develfish-repo.utils.git
-  develfish-repo.project:
-    uri: git@github.com:Develfish-Studio/develfish-repo.project.git
-  develfish-repo.project-compose:
-    uri: git@github.com:Develfish-Studio/develfish-repo.project-compose.git
-  develfish-repo.project-spring:
-    uri: git@github.com:Develfish-Studio/develfish-repo.project-spring.git
+  lorry.utils:
+    uri: git@github.com:Develfish-Studio/lorry.utils.git
+  lorry.project:
+    uri: git@github.com:Develfish-Studio/lorry.project.git
+  lorry.project-compose:
+    uri: git@github.com:Develfish-Studio/lorry.project-compose.git
+  lorry.project-spring:
+    uri: git@github.com:Develfish-Studio/lorry.project-spring.git
 targets:
   '@':
     path: .
