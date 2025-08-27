@@ -35,7 +35,7 @@ public class SystemPublicPromotionTypeController {
     private final SystemPublicPromotionTypeService systemPublicPromotionTypeService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public SystemPublicPromotionTypeResponse.Create create(
@@ -46,7 +46,7 @@ public class SystemPublicPromotionTypeController {
     }
     
     @PostMapping("/remove")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicPromotionTypeResponse.Remove remove(
@@ -57,7 +57,7 @@ public class SystemPublicPromotionTypeController {
     }
     
     @PostMapping("/removeAll")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicPromotionTypeResponse.RemoveAll removeAll(
@@ -68,7 +68,7 @@ public class SystemPublicPromotionTypeController {
     }
     
     @PutMapping("/update")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public SystemPublicPromotionTypeResponse.Update update(
@@ -79,7 +79,7 @@ public class SystemPublicPromotionTypeController {
     }
     
     @DeleteMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicPromotionTypeResponse.Remove remove(
@@ -93,7 +93,7 @@ public class SystemPublicPromotionTypeController {
     }
     
     @PutMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Replace.class)
     public SystemPublicPromotionTypeResponse.Replace replace(
@@ -108,7 +108,7 @@ public class SystemPublicPromotionTypeController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<SystemPublicPromotionTypeModel> select(
@@ -120,7 +120,7 @@ public class SystemPublicPromotionTypeController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public SystemPublicPromotionTypeModel get(

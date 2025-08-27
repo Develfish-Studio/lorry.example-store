@@ -35,7 +35,7 @@ public class SystemPublicOrderController {
     private final SystemPublicOrderService systemPublicOrderService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public SystemPublicOrderResponse.Create create(
@@ -46,7 +46,7 @@ public class SystemPublicOrderController {
     }
     
     @PostMapping("/remove")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicOrderResponse.Remove remove(
@@ -57,7 +57,7 @@ public class SystemPublicOrderController {
     }
     
     @PostMapping("/removeAll")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicOrderResponse.RemoveAll removeAll(
@@ -68,7 +68,7 @@ public class SystemPublicOrderController {
     }
     
     @PutMapping("/update")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public SystemPublicOrderResponse.Update update(
@@ -79,7 +79,7 @@ public class SystemPublicOrderController {
     }
     
     @DeleteMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicOrderResponse.Remove remove(
@@ -93,7 +93,7 @@ public class SystemPublicOrderController {
     }
     
     @PutMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Replace.class)
     public SystemPublicOrderResponse.Replace replace(
@@ -108,7 +108,7 @@ public class SystemPublicOrderController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<SystemPublicOrderModel> select(
@@ -120,7 +120,7 @@ public class SystemPublicOrderController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public SystemPublicOrderModel get(

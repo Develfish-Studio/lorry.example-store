@@ -35,7 +35,7 @@ public class ProfilePublicCustomerVerifyEmailController {
     private final ProfilePublicCustomerVerifyEmailService profilePublicCustomerVerifyEmailService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public ProfilePublicCustomerVerifyEmailResponse.Create create(
@@ -46,7 +46,7 @@ public class ProfilePublicCustomerVerifyEmailController {
     }
     
     @PutMapping("/update")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public ProfilePublicCustomerVerifyEmailResponse.Update update(
@@ -57,7 +57,7 @@ public class ProfilePublicCustomerVerifyEmailController {
     }
     
     @DeleteMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public ProfilePublicCustomerVerifyEmailResponse.Remove remove(
@@ -71,7 +71,7 @@ public class ProfilePublicCustomerVerifyEmailController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<ProfilePublicCustomerVerifyEmailModel> select(
@@ -83,7 +83,7 @@ public class ProfilePublicCustomerVerifyEmailController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public ProfilePublicCustomerVerifyEmailModel get(

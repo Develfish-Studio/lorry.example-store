@@ -35,7 +35,7 @@ public class SystemPublicPaymentStatusController {
     private final SystemPublicPaymentStatusService systemPublicPaymentStatusService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public SystemPublicPaymentStatusResponse.Create create(
@@ -46,7 +46,7 @@ public class SystemPublicPaymentStatusController {
     }
     
     @PostMapping("/remove")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicPaymentStatusResponse.Remove remove(
@@ -57,7 +57,7 @@ public class SystemPublicPaymentStatusController {
     }
     
     @PostMapping("/removeAll")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicPaymentStatusResponse.RemoveAll removeAll(
@@ -68,7 +68,7 @@ public class SystemPublicPaymentStatusController {
     }
     
     @PutMapping("/update")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public SystemPublicPaymentStatusResponse.Update update(
@@ -79,7 +79,7 @@ public class SystemPublicPaymentStatusController {
     }
     
     @DeleteMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicPaymentStatusResponse.Remove remove(
@@ -93,7 +93,7 @@ public class SystemPublicPaymentStatusController {
     }
     
     @PutMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Replace.class)
     public SystemPublicPaymentStatusResponse.Replace replace(
@@ -108,7 +108,7 @@ public class SystemPublicPaymentStatusController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<SystemPublicPaymentStatusModel> select(
@@ -120,7 +120,7 @@ public class SystemPublicPaymentStatusController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public SystemPublicPaymentStatusModel get(

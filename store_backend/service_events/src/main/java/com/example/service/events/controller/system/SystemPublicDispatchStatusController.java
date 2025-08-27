@@ -35,7 +35,7 @@ public class SystemPublicDispatchStatusController {
     private final SystemPublicDispatchStatusService systemPublicDispatchStatusService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public SystemPublicDispatchStatusResponse.Create create(
@@ -46,7 +46,7 @@ public class SystemPublicDispatchStatusController {
     }
     
     @PostMapping("/remove")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicDispatchStatusResponse.Remove remove(
@@ -57,7 +57,7 @@ public class SystemPublicDispatchStatusController {
     }
     
     @PostMapping("/removeAll")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicDispatchStatusResponse.RemoveAll removeAll(
@@ -68,7 +68,7 @@ public class SystemPublicDispatchStatusController {
     }
     
     @PutMapping("/update")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public SystemPublicDispatchStatusResponse.Update update(
@@ -79,7 +79,7 @@ public class SystemPublicDispatchStatusController {
     }
     
     @DeleteMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicDispatchStatusResponse.Remove remove(
@@ -93,7 +93,7 @@ public class SystemPublicDispatchStatusController {
     }
     
     @PutMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Replace.class)
     public SystemPublicDispatchStatusResponse.Replace replace(
@@ -108,7 +108,7 @@ public class SystemPublicDispatchStatusController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<SystemPublicDispatchStatusModel> select(
@@ -120,7 +120,7 @@ public class SystemPublicDispatchStatusController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public SystemPublicDispatchStatusModel get(

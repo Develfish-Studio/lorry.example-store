@@ -35,7 +35,7 @@ public class SystemPublicSourceTypeController {
     private final SystemPublicSourceTypeService systemPublicSourceTypeService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public SystemPublicSourceTypeResponse.Create create(
@@ -46,7 +46,7 @@ public class SystemPublicSourceTypeController {
     }
     
     @PostMapping("/remove")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicSourceTypeResponse.Remove remove(
@@ -57,7 +57,7 @@ public class SystemPublicSourceTypeController {
     }
     
     @PostMapping("/removeAll")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicSourceTypeResponse.RemoveAll removeAll(
@@ -68,7 +68,7 @@ public class SystemPublicSourceTypeController {
     }
     
     @PutMapping("/update")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public SystemPublicSourceTypeResponse.Update update(
@@ -79,7 +79,7 @@ public class SystemPublicSourceTypeController {
     }
     
     @DeleteMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicSourceTypeResponse.Remove remove(
@@ -93,7 +93,7 @@ public class SystemPublicSourceTypeController {
     }
     
     @PutMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Replace.class)
     public SystemPublicSourceTypeResponse.Replace replace(
@@ -108,7 +108,7 @@ public class SystemPublicSourceTypeController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<SystemPublicSourceTypeModel> select(
@@ -120,7 +120,7 @@ public class SystemPublicSourceTypeController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public SystemPublicSourceTypeModel get(

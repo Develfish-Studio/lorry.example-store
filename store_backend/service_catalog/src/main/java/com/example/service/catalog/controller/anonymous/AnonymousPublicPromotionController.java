@@ -35,7 +35,7 @@ public class AnonymousPublicPromotionController {
     private final AnonymousPublicPromotionService anonymousPublicPromotionService;
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<AnonymousPublicPromotionModel> select(
@@ -47,7 +47,7 @@ public class AnonymousPublicPromotionController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public AnonymousPublicPromotionModel get(

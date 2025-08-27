@@ -117,6 +117,8 @@ public interface SystemPublicPaymentRequest {
         private Optional<java.time.LocalDateTime> createdAt;
         
         private Optional<java.time.LocalDateTime> updatedAt;
+        
+        private Optional<com.example.service.payments.request.system.SystemPublicOrderRequest.Select> order;
 
         @Valid
         @Hidden

@@ -35,7 +35,7 @@ public class AnonymousPublicCategoryController {
     private final AnonymousPublicCategoryService anonymousPublicCategoryService;
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<AnonymousPublicCategoryModel> select(
@@ -47,7 +47,7 @@ public class AnonymousPublicCategoryController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public AnonymousPublicCategoryModel get(

@@ -35,7 +35,7 @@ public class ProfilePublicCustomerController {
     private final ProfilePublicCustomerService profilePublicCustomerService;
     
     @PutMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public ProfilePublicCustomerResponse.Upsert upsert(
@@ -46,7 +46,7 @@ public class ProfilePublicCustomerController {
     }
     
     @GetMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public ProfilePublicCustomerModel find(

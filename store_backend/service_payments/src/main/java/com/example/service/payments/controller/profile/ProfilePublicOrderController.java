@@ -35,7 +35,7 @@ public class ProfilePublicOrderController {
     private final ProfilePublicOrderService profilePublicOrderService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public ProfilePublicOrderResponse.Create create(
@@ -46,7 +46,7 @@ public class ProfilePublicOrderController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<ProfilePublicOrderModel> select(
@@ -58,7 +58,7 @@ public class ProfilePublicOrderController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public ProfilePublicOrderModel get(

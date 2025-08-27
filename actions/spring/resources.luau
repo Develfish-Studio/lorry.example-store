@@ -1,3 +1,5 @@
+--!strict
+
 local Resource = require('@develfish-repo.project-spring/lib/Resource/Resource')
 
 local projections = require('./projections')

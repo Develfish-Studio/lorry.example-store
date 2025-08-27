@@ -35,7 +35,7 @@ public class ProfilePublicCustomerVerifyPhoneController {
     private final ProfilePublicCustomerVerifyPhoneService profilePublicCustomerVerifyPhoneService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public ProfilePublicCustomerVerifyPhoneResponse.Create create(
@@ -46,7 +46,7 @@ public class ProfilePublicCustomerVerifyPhoneController {
     }
     
     @PutMapping("/update")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public ProfilePublicCustomerVerifyPhoneResponse.Update update(
@@ -57,7 +57,7 @@ public class ProfilePublicCustomerVerifyPhoneController {
     }
     
     @DeleteMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public ProfilePublicCustomerVerifyPhoneResponse.Remove remove(
@@ -71,7 +71,7 @@ public class ProfilePublicCustomerVerifyPhoneController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<ProfilePublicCustomerVerifyPhoneModel> select(
@@ -83,7 +83,7 @@ public class ProfilePublicCustomerVerifyPhoneController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public ProfilePublicCustomerVerifyPhoneModel get(

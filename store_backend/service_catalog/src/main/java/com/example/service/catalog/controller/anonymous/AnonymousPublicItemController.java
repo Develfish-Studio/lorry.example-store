@@ -35,7 +35,7 @@ public class AnonymousPublicItemController {
     private final AnonymousPublicItemService anonymousPublicItemService;
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<AnonymousPublicItemModel> select(
@@ -47,7 +47,7 @@ public class AnonymousPublicItemController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public AnonymousPublicItemModel get(

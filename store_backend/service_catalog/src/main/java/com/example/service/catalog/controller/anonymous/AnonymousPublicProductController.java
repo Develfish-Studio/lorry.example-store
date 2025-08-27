@@ -35,7 +35,7 @@ public class AnonymousPublicProductController {
     private final AnonymousPublicProductService anonymousPublicProductService;
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<AnonymousPublicProductModel> select(
@@ -47,7 +47,7 @@ public class AnonymousPublicProductController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public AnonymousPublicProductModel get(

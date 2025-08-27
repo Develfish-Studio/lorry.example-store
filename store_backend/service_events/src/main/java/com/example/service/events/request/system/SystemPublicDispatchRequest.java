@@ -129,6 +129,8 @@ public interface SystemPublicDispatchRequest {
         private Optional<java.time.LocalDateTime> updatedAt;
         
         private Optional<com.fasterxml.jackson.databind.JsonNode> payload;
+        
+        private Optional<com.example.service.events.request.system.SystemPublicSubscriptionRequest.Select> subscription;
 
         @Valid
         @Hidden

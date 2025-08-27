@@ -1,20 +1,16 @@
 --!strict
 --#region Imports
 local Lorry = require("@develfish-repo.utils/lib/Lorry")
--- local Project = require('@develfish-repo.project/lib/Project')
--- local projects = require('./spring/projects')
+local Module = require('@develfish-repo.project-spring/lib/Module/Module')
 local roots = require('./spring/roots')
--- local profiles = require('./spring/profiles')
 local modules = require('./spring/modules')
 local dockerfiles = require('./spring/dockerfiles')
 local units = require('./spring/units')
 local exchanges = require('./spring/exchanges')
--- local projections = require('../local/definitions/projections')
 local assemblies = require('./spring/assemblies')
--- local listeners = require('../local/definitions/listeners')
+local listeners = require('./spring/listeners')
 local resources = require('./spring/resources')
--- local statements = require('../local/definitions/statements')
-local Module = require('@develfish-repo.project-spring/lib/Module/Module')
+local statements = require('./spring/statements')
 --#endregion Imports
 
 for _, root in roots do
@@ -62,12 +58,12 @@ for _, resource in resources do
   Lorry:generate "@develfish-repo.project-spring/resource" { target = '@', variables = resource }
 end
 
--- -- Generate Listeners
--- for _, listener in listeners do
---   Lorry:generate "@develfish-repo.project-spring/listener" { target = '@', variables = listener }
--- end
+-- Generate Listeners
+for _, listener in listeners do
+  Lorry:generate "@develfish-repo.project-spring/listener" { target = '@', variables = listener }
+end
 
--- -- Generate DDL Statements
--- for _, statement in statements do
---   Lorry:generate "@develfish-repo.project-spring/ddl" { target = '@', variables = statement }
--- end
+-- Generate DDL Statements
+for _, statement in statements do
+  Lorry:generate "@develfish-repo.project-spring/ddl" { target = '@', variables = statement }
+end

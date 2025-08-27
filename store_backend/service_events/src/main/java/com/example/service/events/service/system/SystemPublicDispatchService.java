@@ -243,6 +243,12 @@ public class SystemPublicDispatchService {
                     .withOptionalMatch("createdAt", request.getCreatedAt())
                     .withOptionalMatch("updatedAt", request.getUpdatedAt())
                     .withOptionalMatch("payload", request.getPayload())
+                    .withOptionalPathMatch("subscription.id", request, java.util.UUID.class, "subscription.id")
+                    .withOptionalPathMatch("subscription.customerId", request, java.util.UUID.class, "subscription.customerId")
+                    .withOptionalPathMatch("subscription.typeId", request, java.lang.Integer.class, "subscription.typeId")
+                    .withOptionalPathMatch("subscription.sessionId", request, java.lang.String.class, "subscription.sessionId")
+                    .withOptionalPathMatch("subscription.createdAt", request, java.time.LocalDateTime.class, "subscription.createdAt")
+                    .withOptionalPathMatch("subscription.payload", request, com.fasterxml.jackson.databind.JsonNode.class, "subscription.payload")
                     .withWhereStatements(request.get__where())
                     .withOrderStatements(request.get__order())
                     .build();

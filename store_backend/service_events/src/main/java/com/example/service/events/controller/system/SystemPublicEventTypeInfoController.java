@@ -35,7 +35,7 @@ public class SystemPublicEventTypeInfoController {
     private final SystemPublicEventTypeInfoService systemPublicEventTypeInfoService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public SystemPublicEventTypeInfoResponse.Create create(
@@ -46,7 +46,7 @@ public class SystemPublicEventTypeInfoController {
     }
     
     @PostMapping("/remove")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicEventTypeInfoResponse.Remove remove(
@@ -57,7 +57,7 @@ public class SystemPublicEventTypeInfoController {
     }
     
     @PostMapping("/removeAll")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicEventTypeInfoResponse.RemoveAll removeAll(
@@ -68,7 +68,7 @@ public class SystemPublicEventTypeInfoController {
     }
     
     @PutMapping("/update")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public SystemPublicEventTypeInfoResponse.Update update(
@@ -79,7 +79,7 @@ public class SystemPublicEventTypeInfoController {
     }
     
     @DeleteMapping("/i/{name}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public SystemPublicEventTypeInfoResponse.Remove remove(
@@ -93,7 +93,7 @@ public class SystemPublicEventTypeInfoController {
     }
     
     @PutMapping("/i/{name}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Replace.class)
     public SystemPublicEventTypeInfoResponse.Replace replace(
@@ -108,7 +108,7 @@ public class SystemPublicEventTypeInfoController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<SystemPublicEventTypeInfoModel> select(
@@ -120,7 +120,7 @@ public class SystemPublicEventTypeInfoController {
     }
     
     @GetMapping("/i/{name}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("hasAnyAuthority('realm:developer', 'realm:admin', 'realm:support')")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public SystemPublicEventTypeInfoModel get(

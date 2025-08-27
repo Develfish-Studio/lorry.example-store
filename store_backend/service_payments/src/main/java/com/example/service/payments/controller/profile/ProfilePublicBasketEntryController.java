@@ -35,7 +35,7 @@ public class ProfilePublicBasketEntryController {
     private final ProfilePublicBasketEntryService profilePublicBasketEntryService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public ProfilePublicBasketEntryResponse.Create create(
@@ -46,7 +46,7 @@ public class ProfilePublicBasketEntryController {
     }
     
     @PostMapping("/remove")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public ProfilePublicBasketEntryResponse.Remove remove(
@@ -57,7 +57,7 @@ public class ProfilePublicBasketEntryController {
     }
     
     @PostMapping("/removeAll")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public ProfilePublicBasketEntryResponse.RemoveAll removeAll(
@@ -68,7 +68,7 @@ public class ProfilePublicBasketEntryController {
     }
     
     @PutMapping("/update")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public ProfilePublicBasketEntryResponse.Update update(
@@ -79,7 +79,7 @@ public class ProfilePublicBasketEntryController {
     }
     
     @DeleteMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public ProfilePublicBasketEntryResponse.Remove remove(
@@ -93,7 +93,7 @@ public class ProfilePublicBasketEntryController {
     }
     
     @PutMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Replace.class)
     public ProfilePublicBasketEntryResponse.Replace replace(
@@ -108,7 +108,7 @@ public class ProfilePublicBasketEntryController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<ProfilePublicBasketEntryModel> select(
@@ -120,7 +120,7 @@ public class ProfilePublicBasketEntryController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public ProfilePublicBasketEntryModel get(

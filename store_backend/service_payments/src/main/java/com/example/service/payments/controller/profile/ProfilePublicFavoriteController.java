@@ -35,7 +35,7 @@ public class ProfilePublicFavoriteController {
     private final ProfilePublicFavoriteService profilePublicFavoriteService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public ProfilePublicFavoriteResponse.Create create(
@@ -46,7 +46,7 @@ public class ProfilePublicFavoriteController {
     }
     
     @PostMapping("/remove")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public ProfilePublicFavoriteResponse.Remove remove(
@@ -57,7 +57,7 @@ public class ProfilePublicFavoriteController {
     }
     
     @PostMapping("/removeAll")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public ProfilePublicFavoriteResponse.RemoveAll removeAll(
@@ -68,7 +68,7 @@ public class ProfilePublicFavoriteController {
     }
     
     @PutMapping("/update")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public ProfilePublicFavoriteResponse.Update update(
@@ -79,7 +79,7 @@ public class ProfilePublicFavoriteController {
     }
     
     @DeleteMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public ProfilePublicFavoriteResponse.Remove remove(
@@ -93,7 +93,7 @@ public class ProfilePublicFavoriteController {
     }
     
     @PutMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Replace.class)
     public ProfilePublicFavoriteResponse.Replace replace(
@@ -108,7 +108,7 @@ public class ProfilePublicFavoriteController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<ProfilePublicFavoriteModel> select(
@@ -120,7 +120,7 @@ public class ProfilePublicFavoriteController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public ProfilePublicFavoriteModel get(

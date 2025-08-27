@@ -35,7 +35,7 @@ public class ProfilePublicSubscriptionController {
     private final ProfilePublicSubscriptionService profilePublicSubscriptionService;
     
     @PostMapping
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Create.class)
     public ProfilePublicSubscriptionResponse.Create create(
@@ -46,7 +46,7 @@ public class ProfilePublicSubscriptionController {
     }
     
     @PostMapping("/remove")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public ProfilePublicSubscriptionResponse.Remove remove(
@@ -57,7 +57,7 @@ public class ProfilePublicSubscriptionController {
     }
     
     @PostMapping("/removeAll")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public ProfilePublicSubscriptionResponse.RemoveAll removeAll(
@@ -68,7 +68,7 @@ public class ProfilePublicSubscriptionController {
     }
     
     @PutMapping("/update")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Update.class)
     public ProfilePublicSubscriptionResponse.Update update(
@@ -79,7 +79,7 @@ public class ProfilePublicSubscriptionController {
     }
     
     @DeleteMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Remove.class)
     public ProfilePublicSubscriptionResponse.Remove remove(
@@ -93,7 +93,7 @@ public class ProfilePublicSubscriptionController {
     }
     
     @PutMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Replace.class)
     public ProfilePublicSubscriptionResponse.Replace replace(
@@ -108,7 +108,7 @@ public class ProfilePublicSubscriptionController {
     }
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<ProfilePublicSubscriptionModel> select(
@@ -120,7 +120,7 @@ public class ProfilePublicSubscriptionController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public ProfilePublicSubscriptionModel get(

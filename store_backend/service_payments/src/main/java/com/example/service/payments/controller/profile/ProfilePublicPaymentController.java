@@ -35,7 +35,7 @@ public class ProfilePublicPaymentController {
     private final ProfilePublicPaymentService profilePublicPaymentService;
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<ProfilePublicPaymentModel> select(
@@ -47,7 +47,7 @@ public class ProfilePublicPaymentController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("isAuthenticated()")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public ProfilePublicPaymentModel get(

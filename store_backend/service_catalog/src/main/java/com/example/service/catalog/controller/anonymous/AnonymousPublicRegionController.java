@@ -35,7 +35,7 @@ public class AnonymousPublicRegionController {
     private final AnonymousPublicRegionService anonymousPublicRegionService;
     
     @PostMapping("/select")
-    @PreAuthorize("[object]")
+    @PreAuthorize("")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public Page<AnonymousPublicRegionModel> select(
@@ -47,7 +47,7 @@ public class AnonymousPublicRegionController {
     }
     
     @GetMapping("/i/{id}")
-    @PreAuthorize("[object]")
+    @PreAuthorize("")
     @SecurityRequirement(name = "Bearer")
     @JsonView(Views.Select.class)
     public AnonymousPublicRegionModel get(
