@@ -18,8 +18,10 @@ luau:
 actions:
   generate/compose:
     path: actions/generate-compose.luau
-  generate/spring:
-    path: actions/generate-spring.luau
+  generate/backend:
+    path: actions/generate-backend.luau
+  generate/admin-ui:
+    path: actions/generate-admin-ui.luau
 dependencies:
   lorry.utils:
     uri: git@github.com:Develfish-Studio/lorry.utils.git
@@ -29,6 +31,8 @@ dependencies:
     uri: git@github.com:Develfish-Studio/lorry.project-compose.git
   lorry.project-spring:
     uri: git@github.com:Develfish-Studio/lorry.project-spring.git
+  lorry.project-vue:
+    uri: git@github.com:Develfish-Studio/lorry.project-vue.git
 targets:
   '@':
     path: .

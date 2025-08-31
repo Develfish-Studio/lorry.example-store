@@ -2,17 +2,18 @@
 --#region Imports
 local Lorry = require("@lorry.utils/lib/Lorry")
 local Module = require('@lorry.project-spring/lib/Module/Module')
-local roots = require('./spring/roots')
-local modules = require('./spring/modules')
-local dockerfiles = require('./spring/dockerfiles')
-local units = require('./spring/units')
-local exchanges = require('./spring/exchanges')
-local assemblies = require('./spring/assemblies')
-local listeners = require('./spring/listeners')
-local resources = require('./spring/resources')
-local statements = require('./spring/statements')
+local roots = require('./backend/roots')
+local modules = require('./backend/modules')
+local dockerfiles = require('./backend/dockerfiles')
+local units = require('./backend/units')
+local exchanges = require('./backend/exchanges')
+local assemblies = require('./backend/assemblies')
+local listeners = require('./backend/listeners')
+local resources = require('./backend/resources')
+local statements = require('./backend/statements')
 --#endregion Imports
 
+-- Generate Roots
 for _, root in roots do
   Lorry:generate "@lorry.project-spring/root" { target = '@', variables = root }
 end

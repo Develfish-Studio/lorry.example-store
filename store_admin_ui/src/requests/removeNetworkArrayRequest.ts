@@ -1,0 +1,25 @@
+import { structureRemote } from '../remotes/structureRemote'
+import { StructureWithIdRecord } from '../structures/StructureWithIdRecord';
+
+export type RequestRemoveNetworkArrayProps = {
+  payload: StructureWithIdRecord[]
+}
+export type RequestRemoveNetworkArrayResponse = any
+
+export const removeNetworkArrayRequest = async (props: RequestRemoveNetworkArrayProps): Promise<RequestRemoveNetworkArrayResponse> => {
+
+  const { data } = await structureRemote.request<RequestRemoveNetworkArrayResponse>({
+    method: `POST`,
+    url: `/system/public_network/removeAll`,
+    data: Object.assign([], props.payload),
+    params: {},
+    paramsSerializer: {
+      indexes: null
+    },
+    headers: {
+      Authorization: `Bearer ${props.token}`
+    },
+  })
+
+  return data
+}
