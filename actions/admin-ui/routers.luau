@@ -7,13 +7,13 @@ local routers = {}
 
 routers.router_personal = Router
   :from_view(views.view_personal, 'personal')
-  :with_rules {
+  :setup {
     routes.route_dashboard,
   }
 
 routers.router_admin = Router
   :from_view(views.view_admin, 'admin')
-  :with_rules {
+  :setup {
     routes.route_customer_list,
     routes.route_customer_info,
     routes.route_agent_list,

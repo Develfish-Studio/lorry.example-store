@@ -1,13 +1,15 @@
-local Fieldset = require('vue/Fieldset')
+--!strict
 
-local queries = require('vue/definitions/queries')
-local symbols = require('vue/definitions/symbols')
+local Fieldset = require('@lorry.project-vue/lib/Fieldset/Fieldset')
+
+local queries = require('./queries')
+local symbols = require('./symbols')
 
 local fieldsets = {}
 
 fieldsets.fieldset_customer_info = Fieldset
   :from_query(queries.query_customer_get, 'customer_info')
-  :with_rules {
+  :setup {
     Fieldset.Field:from_path('name', 'name'),
     Fieldset.Field:from_path('patronymic', 'patronymic'),
     Fieldset.Field:from_path('surname', 'surname'),
@@ -17,14 +19,14 @@ fieldsets.fieldset_customer_info = Fieldset
 
 fieldsets.fieldset_agent_info = Fieldset
   :from_query(queries.query_agent_get, 'agent_info')
-  :with_rules {
+  :setup {
     Fieldset.Field:from_path('title', 'title'),
     Fieldset.Field:from_symbol('customer', symbols.symbol_customer, 'customer'),
   }
 
 fieldsets.fieldset_order_info = Fieldset
   :from_query(queries.query_order_get, 'order_info')
-  :with_rules {
+  :setup {
     Fieldset.Field:from_symbol('customer', symbols.symbol_customer, 'customer'),
     Fieldset.Field:from_symbol('source_type', symbols.symbol_source_type, 'sourceType'),
     Fieldset.Field:from_symbol('order_type', symbols.symbol_order_type, 'orderType'),
@@ -40,14 +42,14 @@ fieldsets.fieldset_order_info = Fieldset
 
 fieldsets.fieldset_product_info = Fieldset
   :from_query(queries.query_product_get, 'product_info')
-  :with_rules {
+  :setup {
     Fieldset.Field:from_path('name', 'name'),
     Fieldset.Field:from_path('description', 'description'),
   }
 
 fieldsets.fieldset_guide_info = Fieldset
   :from_query(queries.query_guide_get, 'guide_guide_info')
-  :with_rules {
+  :setup {
     Fieldset.Field:from_path('name', 'name'),
     Fieldset.Field:from_path('link', 'link'),
     Fieldset.Field:from_symbol('subject', symbols.symbol_guide_subject, 'subject'),
@@ -57,7 +59,7 @@ fieldsets.fieldset_guide_info = Fieldset
 
 fieldsets.fieldset_guide_subject_info = Fieldset
   :from_query(queries.query_guide_subject_get, 'guide_subject_info')
-  :with_rules {
+  :setup {
     Fieldset.Field:from_path('name', 'name'),
     Fieldset.Field:from_path('position', 'position'),
   }

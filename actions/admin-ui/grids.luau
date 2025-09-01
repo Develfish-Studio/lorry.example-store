@@ -1,14 +1,14 @@
-local Grid = require('vue/Grid')
+local Grid = require('@lorry.project-vue/lib/Grid/Grid')
 
-local queries = require('vue/definitions/queries')
-local symbols = require('vue/definitions/symbols')
-local actions = require('vue/definitions/actions')
+local queries = require('./queries')
+local symbols = require('./symbols')
+local actions = require('./actions')
 
 local grids = {}
 
 grids.grid_customer = Grid
   :from_query(queries.query_customer_select, 'customers')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -20,7 +20,7 @@ grids.grid_customer = Grid
 
 grids.grid_agent = Grid
   :from_query(queries.query_agent_select, 'agents')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -31,7 +31,7 @@ grids.grid_agent = Grid
 
 grids.grid_item = Grid
   :from_query(queries.query_item_select, 'items')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -45,7 +45,7 @@ grids.grid_item = Grid
 
 grids.grid_product = Grid
   :from_query(queries.query_product_select, 'products')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -61,7 +61,7 @@ grids.grid_product = Grid
 
 grids.grid_category = Grid
   :from_query(queries.query_category_select, 'categories')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -72,7 +72,7 @@ grids.grid_category = Grid
 
 grids.grid_region = Grid
   :from_query(queries.query_region_select, 'regions')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -83,7 +83,7 @@ grids.grid_region = Grid
 
 grids.grid_shop = Grid
   :from_query(queries.query_shop_select, 'shops')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -95,7 +95,7 @@ grids.grid_shop = Grid
 
 grids.grid_promotion_type = Grid
   :from_query(queries.query_promotion_type_select, 'promotion_types')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -103,7 +103,7 @@ grids.grid_promotion_type = Grid
 
 grids.grid_promotion_target = Grid
   :from_query(queries.query_promotion_target_select, 'promotion_targets')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -114,7 +114,7 @@ grids.grid_promotion_target = Grid
 
 grids.grid_order_type = Grid
   :from_query(queries.query_order_type_select, 'order_types')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -122,7 +122,7 @@ grids.grid_order_type = Grid
 
 grids.grid_order_status = Grid
   :from_query(queries.query_order_status_select, 'order_statuses')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -130,7 +130,7 @@ grids.grid_order_status = Grid
 
 grids.grid_source_type = Grid
   :from_query(queries.query_source_type_select, 'source_types')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -138,7 +138,7 @@ grids.grid_source_type = Grid
 
 grids.grid_payment_type = Grid
   :from_query(queries.query_payment_type_select, 'payment_types')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -146,7 +146,7 @@ grids.grid_payment_type = Grid
 
 grids.grid_payment_status = Grid
   :from_query(queries.query_payment_status_select, 'payment_statuses')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -154,7 +154,7 @@ grids.grid_payment_status = Grid
 
 grids.grid_promotion = Grid
   :from_query(queries.query_promotion_select, 'promotions')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -165,7 +165,7 @@ grids.grid_promotion = Grid
 
 grids.grid_order = Grid
   :from_query(queries.query_order_select, 'orders')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -181,7 +181,7 @@ grids.grid_order = Grid
 
 grids.grid_payment = Grid
   :from_query(queries.query_payment_select, 'payments')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -200,7 +200,7 @@ grids.grid_payment = Grid
 
 grids.grid_event = Grid
   :from_query(queries.query_event_select, 'events')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
       :with_variable('route', '`/admin/events/${slotProps.data.id}`'),
@@ -214,28 +214,28 @@ grids.grid_event = Grid
 
 grids.grid_event_type = Grid
   :from_query(queries.query_event_type_select, 'event_types')
-  :with_rules {
+  :setup {
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
   }
 
 grids.grid_event_topic = Grid
   :from_query(queries.query_event_topic_select, 'event_topics')
-  :with_rules {
+  :setup {
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
   }
 
 grids.grid_event_source = Grid
   :from_query(queries.query_event_source_select, 'event_sources')
-  :with_rules {
+  :setup {
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
   }
 
 grids.grid_dispatch = Grid
   :from_query(queries.query_dispatch_select, 'dispatches')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -250,7 +250,7 @@ grids.grid_dispatch = Grid
 
 grids.grid_dispatch_type = Grid
   :from_query(queries.query_dispatch_type_select, 'dispatch_types')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -258,7 +258,7 @@ grids.grid_dispatch_type = Grid
 
 grids.grid_dispatch_status = Grid
   :from_query(queries.query_dispatch_status_select, 'dispatch_statuses')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -266,7 +266,7 @@ grids.grid_dispatch_status = Grid
 
 grids.grid_subscription = Grid
   :from_query(queries.query_subscription_select, 'subscriptions')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
       :with_variable('route', '`/admin/subscriptions/${slotProps.data.id}`'),
@@ -278,7 +278,7 @@ grids.grid_subscription = Grid
 
 grids.grid_subscription_type = Grid
   :from_query(queries.query_subscription_type_select, 'subscription_types')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -286,7 +286,7 @@ grids.grid_subscription_type = Grid
 
 grids.grid_template = Grid
   :from_query(queries.query_template_select, 'templates')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -298,7 +298,7 @@ grids.grid_template = Grid
 
 grids.grid_template_type = Grid
   :from_query(queries.query_template_type_select, 'template_types')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -306,7 +306,7 @@ grids.grid_template_type = Grid
 
 grids.grid_template_shape = Grid
   :from_query(queries.query_template_shape_select, 'template_shapes')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -314,7 +314,7 @@ grids.grid_template_shape = Grid
 
 grids.grid_network = Grid
   :from_query(queries.query_network_select, 'networks')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -327,7 +327,7 @@ grids.grid_network = Grid
 
 grids.grid_network_type = Grid
   :from_query(queries.query_network_type_select, 'network_types')
-  :with_rules {
+  :setup {
     Grid.Column:from_symbol('id', symbols.symbol_id, 'id'),
     Grid.Column:from_path('name', 'name'),
     Grid.Column:from_path('description', 'description'),
@@ -335,7 +335,7 @@ grids.grid_network_type = Grid
 
 grids.grid_guide = Grid
   :from_query(queries.query_guide_select, 'guides')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")
@@ -348,7 +348,7 @@ grids.grid_guide = Grid
 
 grids.grid_guide_subject = Grid
   :from_query(queries.query_guide_subject_select, 'guide_subjects')
-  :with_rules {
+  :setup {
     Grid.Column
       :from_symbol('id', symbols.symbol_id, 'id')
       :with_variable('label', "'REF'")

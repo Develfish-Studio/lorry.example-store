@@ -1,0 +1,154 @@
+<script setup lang="ts">
+import Column from 'primevue/column';
+import DataTable from 'primevue/datatable';
+import { type State } from '../../hooks/useAxiosRequest';
+{%- if handles | length > 0 %}
+import SpeedDial from 'primevue/speeddial';
+{%- for h in handles %}
+import { useAction{{h.action.pascal_name}} } from '../../actions/useAction{{h.action.pascal_name}}'
+{%- endfor %}
+{%- endif %}
+{%- for column in columns | filter(attribute='column.kind', value='symbol') | unique(attribute='symbol.pascal_name') %}
+import Symbol{{column.symbol.pascal_name}} from '../symbols/Symbol{{column.symbol.pascal_name}}.vue'
+{%- endfor %}
+{%- if request is containing('structure') %}
+import { Structure{{request.structure.pascal_name}} } from '../../structures/Structure{{request.structure.pascal_name}}'
+{%- endif %}
+
+{%- if request is containing('structure') %}
+{# Blank line #}
+export type Grid{{grid.pascal_name}}Record = Structure{{request.structure.pascal_name}}['content'][0]
+{%- else %}
+{# Blank line #}
+export type Grid{{grid.pascal_name}}Record = Record<string, any>
+{%- endif %}
+
+export type Grid{{grid.pascal_name}}Page = {
+  content: Grid{{grid.pascal_name}}Record[]
+}
+
+export type Grid{{grid.pascal_name}}Props = {
+  state: State<Grid{{grid.pascal_name}}Page>,
+  scrollable?: boolean,
+  scrollHeight?: string,
+  {%- for column in columns %}
+  hide{{column.column.pascal_name}}?: boolean,
+  {%- endfor %}
+}
+
+const selection = defineModel<Grid{{grid.pascal_name}}Record[]>('selection')
+
+withDefaults(defineProps<Grid{{grid.pascal_name}}Props>(), {
+  scrollable: true,
+  scrollHeight: 'flex',
+})
+
+// @ts-ignore
+const emit = defineEmits<{
+  (e: 'refresh'): void
+}>()
+
+{%- if handles | length > 0 %}
+{# Blank line #}
+{%- for h in handles %}
+const action{{h.action.pascal_name}} = useAction{{h.action.pascal_name}}()
+{%- endfor %}
+
+{%- for h in handles %}
+{# Blank line #}
+action{{h.action.pascal_name}}.emitter
+  .on('success', (data: any) => {
+    console.log(data)
+    {%- for r in h.on_success %}
+    emit('{{r.event}}'{% if r.data is defined %}, {{r.data | json_encode}}{% endif %})
+    {%- endfor %}
+  })
+  .on('failure', (error: any) => {
+    console.error(error)
+    {%- for r in h.on_failure %}
+    emit('{{r.event}}'{% if r.data is defined %}, {{r.data | json_encode}}{% endif %})
+    {%- endfor %}
+  })
+{%- endfor %}
+
+{%- for h in handles %}
+{# Blank line #}
+async function handle{{h.handle.pascal_name}}(item: Grid{{grid.pascal_name}}Record) {
+  action{{h.action.pascal_name}}.execute({{h.handle.expression | default(value='undefined')}})
+}
+{%- endfor %}
+
+const buildHandles = (item: Grid{{grid.pascal_name}}Record) => ([
+  {%- for h in handles %}
+  {
+    label: '{{h.handle.title_name}}',
+    icon: '{{h.handle.icon | default(value='pi pi-pencil')}}',
+    command: () => {
+      handle{{h.handle.pascal_name}}(item)
+    }
+  },
+  {%- endfor %}
+])
+{%- endif %}
+
+</script>
+
+<template>
+  <DataTable
+    :loading="state.isLoading"
+    v-model:selection="selection"
+    :value="state.data?.content || []"
+    :scrollable="scrollable"
+    :scrollHeight="scrollHeight"
+    :class="{
+      'overflow-hidden': scrollable
+    }"
+    :pt="{
+      column: {
+        bodyCell: {
+          class: 'text-left border-0 border-b border-solid border-r border-b p-2 border-surface-200 dark:border-surface-700'
+        },
+        headerCell: {
+          class: 'font-normal text-sm text-left border-t-0 border-y border-r border-0 border-b border-solid p-2 bg-surface-50 text-surface-700 dark:text-white/80 dark:bg-surface-800 border-surface-200 dark:border-surface-700 focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:ring focus-visible:ring-inset focus-visible:ring-primary-400/50 dark:focus-visible:ring-primary-300/50'
+        }
+      }
+    }"
+  >
+    <Column selectionMode="multiple" headerStyle="width: 3rem" />
+    <Column header="#" headerStyle="width:3rem">
+      <template #body="slotProps">
+        <div v-text="slotProps.index + 1"></div>
+      </template>
+    </Column>
+    {%- for column in columns %}
+    {%- if column.column.kind == 'template' %}
+    <Column v-if="!hide{{column.column.pascal_name}}" header="{{column.column.title_name}}">
+      <template #body="slotProps">
+        {{column.column.template}}
+      </template>
+    </Column>
+    {%- elif column.column.kind == 'symbol' %}
+    <Column v-if="!hide{{column.column.pascal_name}}" header="{{column.column.title_name}}">
+      <template #body="slotProps">
+        {%- if column.column.path is defined %}
+        <Symbol{{column.symbol.pascal_name}} :value="slotProps.data.{{column.column.path}}"{% for v in column.variables %} :{{v.name}}="{{v.value}}"{% endfor %}/>
+        {%- else %}
+        <Symbol{{column.symbol.pascal_name}} :value="slotProps.data" />
+        {%- endif %}
+      </template>
+    </Column>
+    {%- elif column.column.kind == 'path' %}
+    <Column v-if="!hide{{column.column.pascal_name}}" field="{{column.column.path}}" header="{{column.column.title_name}}" />
+    {%- endif %}
+    {%- endfor %}
+    {%- if handles | length > 0 %}
+    <Column header="" class="w-1">
+      <template #body="slotProps">
+        <div class="relative flex w-8 justify-end">
+          <SpeedDial :model="buildHandles(slotProps.data)" direction="left" class="relative" />
+        </div>
+      </template>
+    </Column>
+    {%- endif %}
+  </DataTable>
+</template>

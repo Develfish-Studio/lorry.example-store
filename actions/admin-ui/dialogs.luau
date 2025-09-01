@@ -1,11 +1,13 @@
-local Dialog = require('vue/Dialog')
+--!strict
 
-local projects = require('vue/definitions/projects')
-local requests = require('vue/definitions/requests')
-local structures = require('vue/definitions/structures')
-local selects = require('vue/definitions/selects')
-local uploads = require('vue/definitions/uploads')
-local editors = require('vue/definitions/editors')
+local Dialog = require('@lorry.project-vue/lib/Dialog/Dialog')
+
+local projects = require('./projects')
+local requests = require('./requests')
+local structures = require('./structures')
+local selects = require('./selects')
+local uploads = require('./uploads')
+local editors = require('./editors')
 
 local dialogs = {}
 
@@ -14,7 +16,7 @@ dialogs.dialog_dispatch_message = Dialog
 
 dialogs.dialog_network_create = Dialog
   :from(projects.project, 'network_create')
-  :with_rules {
+  :setup {
     Dialog.Field:from_select(selects.select_network_type, 'type_id'),
     Dialog.Field:from_select(selects.select_shop_id, 'shop_id'),
     Dialog.Field:from_text('name'),
@@ -30,7 +32,7 @@ dialogs.dialog_network_create = Dialog
 
 dialogs.dialog_guide_subject_create = Dialog
   :from(projects.project, 'guide_subject_create')
-  :with_rules {
+  :setup {
     Dialog.Field:from_text('name'),
     Dialog.Field:from_number('position'),
     Dialog.Call
@@ -42,7 +44,7 @@ dialogs.dialog_guide_subject_create = Dialog
 
 dialogs.dialog_guide_create = Dialog
   :from(projects.project, 'guide_create')
-  :with_rules {
+  :setup {
     Dialog.Field:from_text('name'),
     Dialog.Field:from_text('link'),
     Dialog.Field:from_number('position'),
@@ -58,7 +60,7 @@ dialogs.dialog_guide_create = Dialog
 
 dialogs.dialog_product_create = Dialog
   :from(projects.project, 'product_create')
-  :with_rules {
+  :setup {
     Dialog.Field:from_text('name'),
     Dialog.Field:from_editor_js(editors.editor_product_description, 'description'),
     Dialog.Field:from_text('price'),
@@ -74,7 +76,7 @@ dialogs.dialog_product_create = Dialog
 
 dialogs.dialog_product_update = Dialog
   :from(projects.project, 'product_update')
-  :with_rules {
+  :setup {
     Dialog.Prop
       :from_structure('product', structures.structure_public_product_record),
 

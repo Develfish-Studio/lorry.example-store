@@ -3,7 +3,7 @@
 local Lorry = require("@lorry.utils/lib/Lorry")
 local roots = require('./admin-ui/roots')
 local dockerfiles = require('./admin-ui/dockerfiles')
--- local routers = require('./admin-ui/routers')
+local routers = require('./admin-ui/routers')
 local remotes = require('./admin-ui/remotes')
 local structures = require('./admin-ui/structures')
 local symbols = require('./admin-ui/symbols')
@@ -14,17 +14,16 @@ local editors = require('./admin-ui/editors')
 local widgets = require('./admin-ui/widgets')
 local requests = require('./admin-ui/requests')
 local queries = require('./admin-ui/queries')
+local fieldsets = require('./admin-ui/fieldsets')
+local dialogs = require('./admin-ui/dialogs')
+local pages = require('./admin-ui/pages')
+local views = require('./admin-ui/views')
+local grids = require('./admin-ui/grids')
+local toolbars = require('./admin-ui/toolbars')
+local actions = require('./admin-ui/actions')
 --#endregion Imports
 
--- local views = require('vue/definitions/views')
--- local grids = require('vue/definitions/grids')
--- local fieldsets = require('vue/definitions/fieldsets')
--- local editors = require('vue/definitions/editors')
--- local toolbars = require('vue/definitions/toolbars')
--- local pages = require('vue/definitions/pages')
 -- local menus = require('vue/definitions/menus')
--- local dialogs = require('vue/definitions/dialogs')
--- local actions = require('vue/definitions/actions')
 
 -- Generate Roots
 for _, root in roots do
@@ -36,10 +35,10 @@ for _, docker in dockerfiles do
   Lorry:generate "@lorry.project-vue/docker" { target = '@', variables = docker }
 end
 
--- -- Generate Routers
--- for _, router in routers do
---   Lorry:generate "@lorry.project-vue/router" { target = '@', variables = router }
--- end
+-- Generate Routers
+for _, router in routers do
+  Lorry:generate "@lorry.project-vue/router" { target = '@', variables = router }
+end
 
 -- Generate Remotes
 for _, remote in remotes do
@@ -51,10 +50,10 @@ for _, request in requests do
   Lorry:generate "@lorry.project-vue/request" { target = '@', variables = request }
 end
 
--- -- Generate Views
--- for _, view in views do
---   ggcode.generate "@/view" { target = '@store', variables = view:unwrap() }
--- end
+-- Generate Views
+for _, view in views do
+  Lorry:generate "@lorry.project-vue/view" { target = '@', variables = view }
+end
 
 -- Generate Structures
 for _, structure in structures do
@@ -86,25 +85,25 @@ for _, symbol in symbols do
   Lorry:generate "@lorry.project-vue/symbol" { target = '@', variables = symbol }
 end
 
--- -- Generate Grids
--- for _, grid in grids do
---   ggcode.generate "@/grid" { target = '@store', variables = grid:unwrap() }
--- end
+-- Generate Grids
+for _, grid in grids do
+  Lorry:generate "@lorry.project-vue/grid" { target = '@', variables = grid }
+end
 
--- -- Generate Fieldsets
--- for _, fieldset in fieldsets do
---   ggcode.generate "@/fieldset" { target = '@store', variables = fieldset:unwrap() }
--- end
+-- Generate Fieldsets
+for _, fieldset in fieldsets do
+  Lorry:generate "@lorry.project-vue/fieldset" { target = '@', variables = fieldset }
+end
 
--- -- Generate Toolbars
--- for _, toolbar in toolbars do
---   ggcode.generate "@/toolbar" { target = '@store', variables = toolbar:unwrap() }
--- end
+-- Generate Toolbars
+for _, toolbar in toolbars do
+  Lorry:generate "@lorry.project-vue/toolbar" { target = '@', variables = toolbar }
+end
 
--- -- Generate Pages
--- for _, page in pages do
---   ggcode.generate "@/page" { target = '@store', variables = page:unwrap() }
--- end
+-- Generate Pages
+for _, page in pages do
+  Lorry:generate "@lorry.project-vue/page" { target = '@', variables = page }
+end
 
 -- -- Generate Menus
 -- for _, menu in menus do
@@ -116,15 +115,15 @@ for _, widget in widgets do
   Lorry:generate "@lorry.project-vue/widget" { target = '@', variables = widget }
 end
 
--- -- Generate Dialogs
--- for _, dialog in dialogs do
---   ggcode.generate "@/dialog" { target = '@store', variables = dialog:unwrap() }
--- end
+-- Generate Dialogs
+for _, dialog in dialogs do
+  Lorry:generate "@lorry.project-vue/dialog" { target = '@', variables = dialog }
+end
 
--- -- Generate Actions
--- for _, action in actions do
---   ggcode.generate "@/action" { target = '@store', variables = action:unwrap() }
--- end
+-- Generate Actions
+for _, action in actions do
+  Lorry:generate "@lorry.project-vue/action" { target = '@', variables = action }
+end
 
 -- Generate Queries
 for _, query in queries do
