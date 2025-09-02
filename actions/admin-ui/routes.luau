@@ -38,7 +38,8 @@ routes.route_order_list = Router.Route
   :with_role 'realm:admin'
 
 routes.route_order_info = Router.Route
-  :from_page(pages.page_order_info):with_path('orders/:orderId')
+  :from_page(pages.page_order_info)
+  :with_path('orders/:orderId')
   :with_role 'realm:developer'
   :with_role 'realm:admin'
 
@@ -58,7 +59,8 @@ routes.route_product_list = Router.Route
   :with_role 'realm:admin'
 
 routes.route_product_info = Router.Route
-  :from_page(pages.page_product_info):with_path('products/:productId')
+  :from_page(pages.page_product_info)
+  :with_path('products/:productId')
   :with_role 'realm:developer'
   :with_role 'realm:admin'
 

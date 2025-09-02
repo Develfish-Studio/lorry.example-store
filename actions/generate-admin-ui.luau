@@ -21,9 +21,9 @@ local views = require('./admin-ui/views')
 local grids = require('./admin-ui/grids')
 local toolbars = require('./admin-ui/toolbars')
 local actions = require('./admin-ui/actions')
+local menus = require('./admin-ui/menus')
 --#endregion Imports
 
--- local menus = require('vue/definitions/menus')
 
 -- Generate Roots
 for _, root in roots do
@@ -105,10 +105,10 @@ for _, page in pages do
   Lorry:generate "@lorry.project-vue/page" { target = '@', variables = page }
 end
 
--- -- Generate Menus
--- for _, menu in menus do
---   ggcode.generate "@/menu" { target = '@store', variables = menu:unwrap() }
--- end
+-- Generate Menus
+for _, menu in menus do
+  Lorry:generate "@lorry.project-vue/menu" { target = '@', variables = menu }
+end
 
 -- Generate Widgets
 for _, widget in widgets do
