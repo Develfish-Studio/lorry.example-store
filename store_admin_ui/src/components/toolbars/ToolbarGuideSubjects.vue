@@ -106,6 +106,7 @@ actionCreateGuideSubject.emitter
 
 async function handleRemoveSelected() {
   actionGuideSubjectRemoveSelected.execute({
+    items: selection.value,
   })
 }
 

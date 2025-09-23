@@ -162,6 +162,7 @@ actionCreateNetwork.emitter
 
 async function handleRemoveSelected() {
   actionNetworkRemoveSelected.execute({
+    items: selection.value,
   })
 }
 

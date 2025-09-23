@@ -222,6 +222,7 @@ actionDispatchMessage.emitter
 
 async function handleRemoveSelected() {
   actionDispatchRemoveSelected.execute({
+    items: selection.value,
   })
 }
 

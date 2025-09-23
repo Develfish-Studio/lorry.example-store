@@ -28,7 +28,7 @@ pages.page_customer_list = Page
   :setup {
     Page.Heading:from('customers'),
     Page.Section:from_grid(grids.grid_customer),
-    Page.Execution:from(queries.query_customer_select),
+    Page.Query:from(queries.query_customer_select),
   }
 
 pages.page_customer_info = Page
@@ -61,11 +61,11 @@ pages.page_customer_info = Page
       :from_grid(grids.grid_dispatch)
       :with_variable('scrollable', 'false')
       :with_variable('hide-customer', 'true'),
-    Page.Execution:from(queries.query_customer_get, { customerId = 'props.customerId' }),
-    Page.Execution:from(queries.query_order_select, { customerId = 'props.customerId' }),
-    Page.Execution:from(queries.query_agent_select, { customerId = 'props.customerId' }),
-    Page.Execution:from(queries.query_subscription_select, { customerId = 'props.customerId' }),
-    Page.Execution:from(queries.query_dispatch_select, { customerId= 'props.customerId' }),
+    Page.Query:from(queries.query_customer_get, { customerId = 'props.customerId' }),
+    Page.Query:from(queries.query_order_select, { customerId = 'props.customerId' }),
+    Page.Query:from(queries.query_agent_select, { customerId = 'props.customerId' }),
+    Page.Query:from(queries.query_subscription_select, { customerId = 'props.customerId' }),
+    Page.Query:from(queries.query_dispatch_select, { customerId= 'props.customerId' }),
   }
 
 pages.page_agent_list = Page
@@ -74,7 +74,7 @@ pages.page_agent_list = Page
   :setup {
     Page.Heading:from('agents'),
     Page.Section:from_grid(grids.grid_agent),
-    Page.Execution:from(queries.query_agent_select),
+    Page.Query:from(queries.query_agent_select),
   }
 
 pages.page_agent_info = Page
@@ -83,7 +83,7 @@ pages.page_agent_info = Page
     Page.Prop:from_route('agentId'),
     Page.Heading:from('agent'),
     Page.Section:from_fieldset(fieldsets.fieldset_agent_info),
-    Page.Execution:from(queries.query_agent_get, { agentId = 'props.agentId' }),
+    Page.Query:from(queries.query_agent_get, { agentId = 'props.agentId' }),
   }
 
 pages.page_item_list = Page
@@ -92,7 +92,7 @@ pages.page_item_list = Page
     Page.Heading:from('items'),
     Page.Section:from_toolbar(toolbars.toolbar_item),
     Page.Section:from_grid(grids.grid_item),
-    Page.Execution:from(queries.query_item_select),
+    Page.Query:from(queries.query_item_select),
   }
 
 pages.page_product_list = Page
@@ -101,7 +101,7 @@ pages.page_product_list = Page
     Page.Heading:from('products'),
     Page.Section:from_toolbar(toolbars.toolbar_product),
     Page.Section:from_grid(grids.grid_product),
-    Page.Execution:from(queries.query_product_select),
+    Page.Query:from(queries.query_product_select),
   }
 
 pages.page_product_info = Page
@@ -122,9 +122,9 @@ pages.page_product_info = Page
     --   :from_grid(grids.grid_agent)
     --   :with_variable('scrollable', 'false')
     --   :with_variable('hide-customer', 'true'),
-    Page.Execution:from(queries.query_product_get, { productId = 'props.productId' }),
-    Page.Execution:from(queries.query_promotion_target_select, { productId = 'props.productId' }),
-    -- Page.Execution:from(queries.query_agent_select, { productId = 'props.productId' }),
+    Page.Query:from(queries.query_product_get, { productId = 'props.productId' }),
+    Page.Query:from(queries.query_promotion_target_select, { productId = 'props.productId' }),
+    -- Page.Query:from(queries.query_agent_select, { productId = 'props.productId' }),
   }
 
 pages.page_category_list = Page
@@ -132,7 +132,7 @@ pages.page_category_list = Page
   :setup {
     Page.Heading:from('categories'),
     Page.Section:from_grid(grids.grid_category),
-    Page.Execution:from(queries.query_category_select),
+    Page.Query:from(queries.query_category_select),
   }
 
 pages.page_promotion_list = Page
@@ -141,7 +141,7 @@ pages.page_promotion_list = Page
     Page.Heading:from('promotions'),
     Page.Section:from_toolbar(toolbars.toolbar_promotion),
     Page.Section:from_grid(grids.grid_promotion),
-    Page.Execution:from(queries.query_promotion_select),
+    Page.Query:from(queries.query_promotion_select),
   }
 
 pages.page_region_list = Page
@@ -149,7 +149,7 @@ pages.page_region_list = Page
   :setup {
     Page.Heading:from('regions'),
     Page.Section:from_grid(grids.grid_region),
-    Page.Execution:from(queries.query_region_select),
+    Page.Query:from(queries.query_region_select),
   }
 
 pages.page_shop_list = Page
@@ -158,7 +158,7 @@ pages.page_shop_list = Page
     Page.Heading:from('shops'),
     Page.Section:from_toolbar(toolbars.toolbar_shop),
     Page.Section:from_grid(grids.grid_shop),
-    Page.Execution:from(queries.query_shop_select),
+    Page.Query:from(queries.query_shop_select),
   }
 
 pages.page_order_list = Page
@@ -167,7 +167,7 @@ pages.page_order_list = Page
     Page.Heading:from('orders'),
     Page.Section:from_toolbar(toolbars.toolbar_order),
     Page.Section:from_grid(grids.grid_order),
-    Page.Execution:from(queries.query_order_select),
+    Page.Query:from(queries.query_order_select),
   }
 
 pages.page_order_info = Page
@@ -183,8 +183,8 @@ pages.page_order_info = Page
       :from_grid(grids.grid_payment)
       :with_variable('scrollable', 'false')
       :with_variable('hide-order', 'true'),
-    Page.Execution:from(queries.query_order_get, { orderId = 'props.orderId' }),
-    Page.Execution:from(queries.query_payment_select, { orderId = 'props.orderId' }),
+    Page.Query:from(queries.query_order_get, { orderId = 'props.orderId' }),
+    Page.Query:from(queries.query_payment_select, { orderId = 'props.orderId' }),
   }
 
 pages.page_payment_list = Page:from(projects.project, 'payments')
@@ -193,7 +193,7 @@ pages.page_payment_list = Page:from(projects.project, 'payments')
     Page.Heading:from('payments'),
     Page.Section:from_toolbar(toolbars.toolbar_payment),
     Page.Section:from_grid(grids.grid_payment),
-    Page.Execution:from(queries.query_payment_select),
+    Page.Query:from(queries.query_payment_select),
   }
 
 pages.page_order_type_list = Page
@@ -201,7 +201,7 @@ pages.page_order_type_list = Page
   :setup {
     Page.Heading:from('order_types'),
     Page.Section:from_grid(grids.grid_order_type),
-    Page.Execution:from(queries.query_order_type_select),
+    Page.Query:from(queries.query_order_type_select),
   }
 
 pages.page_order_status_list = Page
@@ -209,7 +209,7 @@ pages.page_order_status_list = Page
   :setup {
     Page.Heading:from('order_statuses'),
     Page.Section:from_grid(grids.grid_order_status),
-    Page.Execution:from(queries.query_order_status_select),
+    Page.Query:from(queries.query_order_status_select),
   }
 
 pages.page_payment_type_list = Page
@@ -217,7 +217,7 @@ pages.page_payment_type_list = Page
   :setup {
     Page.Heading:from('payment_types'),
     Page.Section:from_grid(grids.grid_payment_type),
-    Page.Execution:from(queries.query_payment_type_select),
+    Page.Query:from(queries.query_payment_type_select),
   }
 
 pages.page_payment_status_list = Page
@@ -225,7 +225,7 @@ pages.page_payment_status_list = Page
   :setup {
     Page.Heading:from('payment_statuses'),
     Page.Section:from_grid(grids.grid_payment_status),
-    Page.Execution:from(queries.query_payment_status_select),
+    Page.Query:from(queries.query_payment_status_select),
   }
 
 pages.page_promotion_type_list = Page
@@ -233,7 +233,7 @@ pages.page_promotion_type_list = Page
   :setup {
     Page.Heading:from('promotion_types'),
     Page.Section:from_grid(grids.grid_promotion_type),
-    Page.Execution:from(queries.query_promotion_type_select),
+    Page.Query:from(queries.query_promotion_type_select),
   }
 
 pages.page_source_type_list = Page
@@ -241,7 +241,7 @@ pages.page_source_type_list = Page
   :setup {
     Page.Heading:from('source_types'),
     Page.Section:from_grid(grids.grid_source_type),
-    Page.Execution:from(queries.query_source_type_select),
+    Page.Query:from(queries.query_source_type_select),
   }
 
 pages.page_dispatch_list = Page
@@ -250,7 +250,7 @@ pages.page_dispatch_list = Page
     Page.Heading:from('dispatches'),
     Page.Section:from_toolbar(toolbars.toolbar_dispatch),
     Page.Section:from_grid(grids.grid_dispatch),
-    Page.Execution:from(queries.query_dispatch_select),
+    Page.Query:from(queries.query_dispatch_select),
   }
 
 pages.page_dispatch_type_list = Page
@@ -258,7 +258,7 @@ pages.page_dispatch_type_list = Page
   :setup {
     Page.Heading:from('dispatch_types'),
     Page.Section:from_grid(grids.grid_dispatch_type),
-    Page.Execution:from(queries.query_dispatch_type_select),
+    Page.Query:from(queries.query_dispatch_type_select),
   }
 
 pages.page_dispatch_status_list = Page
@@ -266,7 +266,7 @@ pages.page_dispatch_status_list = Page
   :setup {
     Page.Heading:from('dispatch_statuses'),
     Page.Section:from_grid(grids.grid_dispatch_status),
-    Page.Execution:from(queries.query_dispatch_status_select),
+    Page.Query:from(queries.query_dispatch_status_select),
   }
 
 pages.page_subscription_list = Page
@@ -275,7 +275,7 @@ pages.page_subscription_list = Page
     Page.Heading:from('subscriptions'),
     Page.Section:from_toolbar(toolbars.toolbar_subscription),
     Page.Section:from_grid(grids.grid_subscription),
-    Page.Execution:from(queries.query_subscription_select),
+    Page.Query:from(queries.query_subscription_select),
   }
 
 pages.page_subscription_type_list = Page
@@ -283,7 +283,7 @@ pages.page_subscription_type_list = Page
   :setup {
     Page.Heading:from('subscription_types'),
     Page.Section:from_grid(grids.grid_subscription_type),
-    Page.Execution:from(queries.query_subscription_type_select),
+    Page.Query:from(queries.query_subscription_type_select),
   }
 
 pages.page_event_list = Page
@@ -292,7 +292,7 @@ pages.page_event_list = Page
     Page.Heading:from('events'),
     Page.Section:from_toolbar(toolbars.toolbar_event),
     Page.Section:from_grid(grids.grid_event),
-    Page.Execution:from(queries.query_event_select),
+    Page.Query:from(queries.query_event_select),
   }
 
 pages.page_event_topics = Page
@@ -300,7 +300,7 @@ pages.page_event_topics = Page
   :setup {
     Page.Heading:from('event_topics'),
     Page.Section:from_grid(grids.grid_event_topic),
-    Page.Execution:from(queries.query_event_topic_select),
+    Page.Query:from(queries.query_event_topic_select),
   }
 
 pages.page_event_types = Page
@@ -308,7 +308,7 @@ pages.page_event_types = Page
   :setup {
     Page.Heading:from('event_types'),
     Page.Section:from_grid(grids.grid_event_type),
-    Page.Execution:from(queries.query_event_type_select),
+    Page.Query:from(queries.query_event_type_select),
   }
 
 pages.page_event_sources = Page
@@ -316,7 +316,7 @@ pages.page_event_sources = Page
   :setup {
     Page.Heading:from('event_sources'),
     Page.Section:from_grid(grids.grid_event_source),
-    Page.Execution:from(queries.query_event_source_select),
+    Page.Query:from(queries.query_event_source_select),
   }
 
 pages.page_template_list = Page
@@ -325,7 +325,7 @@ pages.page_template_list = Page
     Page.Heading:from('templates'),
     Page.Section:from_toolbar(toolbars.toolbar_template),
     Page.Section:from_grid(grids.grid_template),
-    Page.Execution:from(queries.query_template_select),
+    Page.Query:from(queries.query_template_select),
   }
 
 pages.page_template_type_list = Page
@@ -333,7 +333,7 @@ pages.page_template_type_list = Page
   :setup {
     Page.Heading:from('template_types'),
     Page.Section:from_grid(grids.grid_template_type),
-    Page.Execution:from(queries.query_template_type_select),
+    Page.Query:from(queries.query_template_type_select),
   }
 
 pages.page_template_shape_list = Page
@@ -341,7 +341,7 @@ pages.page_template_shape_list = Page
   :setup {
     Page.Heading:from('template_shapes'),
     Page.Section:from_grid(grids.grid_template_shape),
-    Page.Execution:from(queries.query_template_shape_select),
+    Page.Query:from(queries.query_template_shape_select),
   }
 
 pages.page_network_list = Page
@@ -350,7 +350,7 @@ pages.page_network_list = Page
     Page.Heading:from('networks'),
     Page.Section:from_toolbar(toolbars.toolbar_network),
     Page.Section:from_grid(grids.grid_network),
-    Page.Execution:from(queries.query_network_select),
+    Page.Query:from(queries.query_network_select),
   }
 
 pages.page_network_type_list = Page
@@ -358,7 +358,7 @@ pages.page_network_type_list = Page
   :setup {
     Page.Heading:from('network_types'),
     Page.Section:from_grid(grids.grid_network_type),
-    Page.Execution:from(queries.query_network_type_select),
+    Page.Query:from(queries.query_network_type_select),
   }
 
 pages.page_guide_list = Page
@@ -367,7 +367,7 @@ pages.page_guide_list = Page
     Page.Heading:from('guides'),
     Page.Section:from_toolbar(toolbars.toolbar_guide),
     Page.Section:from_grid(grids.grid_guide),
-    Page.Execution:from(queries.query_guide_select),
+    Page.Query:from(queries.query_guide_select),
   }
 
 pages.page_guide_info = Page
@@ -377,7 +377,7 @@ pages.page_guide_info = Page
     Page.Prop:from_route('guideId'),
     Page.Heading:from('guide'),
     Page.Section:from_fieldset(fieldsets.fieldset_guide_info),
-    Page.Execution:from(queries.query_guide_get, { guideId = 'props.guideId' }),
+    Page.Query:from(queries.query_guide_get, { guideId = 'props.guideId' }),
   }
 
 pages.page_guide_subject_list = Page
@@ -386,7 +386,7 @@ pages.page_guide_subject_list = Page
     Page.Heading:from('guide_subjects'),
     Page.Section:from_toolbar(toolbars.toolbar_guide_subject),
     Page.Section:from_grid(grids.grid_guide_subject),
-    Page.Execution:from(queries.query_guide_subject_select),
+    Page.Query:from(queries.query_guide_subject_select),
   }
 
 pages.page_guide_subject_info = Page
@@ -402,8 +402,8 @@ pages.page_guide_subject_info = Page
       :from_grid(grids.grid_guide)
       :with_variable('scrollable', 'false')
       :with_variable('hide-customer', 'true'),
-    Page.Execution:from(queries.query_guide_subject_get, { subjectId = 'props.subjectId' }),
-    Page.Execution:from(queries.query_guide_select, { subjectId = 'props.subjectId' }),
+    Page.Query:from(queries.query_guide_subject_get, { subjectId = 'props.subjectId' }),
+    Page.Query:from(queries.query_guide_select, { subjectId = 'props.subjectId' }),
   }
 
 return pages

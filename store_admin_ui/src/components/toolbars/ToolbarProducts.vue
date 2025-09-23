@@ -126,6 +126,7 @@ actionCreateProduct.emitter
 
 async function handleRemoveSelected() {
   actionProductRemoveSelected.execute({
+    items: selection.value,
   })
 }
 

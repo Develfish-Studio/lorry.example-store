@@ -24,7 +24,6 @@ local actions = require('./admin-ui/actions')
 local menus = require('./admin-ui/menus')
 --#endregion Imports
 
-
 -- Generate Roots
 for _, root in roots do
   Lorry:generate "@lorry.project-vue/root" { target = '@', variables = root }
