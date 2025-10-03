@@ -2,15 +2,15 @@
 --#region Imports
 local Lorry = require("@lorry.utils/lib/Lorry")
 local Module = require('@lorry.project-spring/lib/Module/Module')
-local roots = require('./backend/roots')
-local modules = require('./backend/modules')
-local dockerfiles = require('./backend/dockerfiles')
-local units = require('./backend/units')
-local exchanges = require('./backend/exchanges')
-local assemblies = require('./backend/assemblies')
-local listeners = require('./backend/listeners')
-local resources = require('./backend/resources')
-local statements = require('./backend/statements')
+local roots = require('@collections/backend/roots')
+local modules = require('@collections/backend/modules')
+local dockerfiles = require('@collections/backend/dockerfiles')
+local units = require('@collections/backend/units')
+local exchanges = require('@collections/backend/exchanges')
+local assemblies = require('@collections/backend/assemblies')
+local listeners = require('@collections/backend/listeners')
+local resources = require('@collections/backend/resources')
+local statements = require('@collections/backend/statements')
 
 --#endregion Imports
 

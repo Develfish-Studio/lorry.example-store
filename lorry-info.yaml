@@ -1,27 +1,22 @@
 name: lorry.example-store
 displayName: Example Store
-version: 0.0.0
 description: Develfish Studio and Develfish Lorry showcase
 author: Igor Pavlenko
 publisher: Igor Pavlenko
 license: DEVELFISH-1.0-or-later OR GPL-3.0-or-later
 homepage: https://github.com/Develfish-Studio/lorry.example-store
-categories:
-  - example
-keywords:
-  - compose
-  - spring
-  - vue
+version: 0.0.0
 luau:
   aliases:
     root: .
-actions:
-  generate/compose:
-    path: actions/generate-compose.luau
-  generate/backend:
-    path: actions/generate-backend.luau
-  generate/admin-ui:
-    path: actions/generate-admin-ui.luau
+    actions: "@actions"
+    collections: "@collections"
+keywords:
+- compose
+- spring
+- vue
+categories:
+- example
 dependencies:
   lorry.utils:
     uri: git@github.com:Develfish-Studio/lorry.utils.git
