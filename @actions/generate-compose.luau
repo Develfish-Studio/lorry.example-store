@@ -63,7 +63,7 @@ local volume_minio = Compose.Volume:from('env-minio')
 
 -- make
 Lorry:generate "@lorry.project-compose/make" {
-  target = '@',
+  target = '@root',
   variables = Make
     :from(project)
     :with_profile 'env'
@@ -72,7 +72,7 @@ Lorry:generate "@lorry.project-compose/make" {
 }
 
 Lorry:generate "@lorry.project-compose/compose" {
-  target = '@',
+  target = '@root',
   variables = Compose
     :from(project)
     :with_include "compose/env/env-haproxy.compose.yaml"
@@ -96,7 +96,7 @@ Lorry:generate "@lorry.project-compose/compose" {
 }
 
 Lorry:generate "@lorry.project-compose/containers/bitnami/kafka" {
-  target = '@',
+  target = '@root',
   variables = Kafka
     :from(project, "env-kafka")
     :configure {
@@ -107,7 +107,7 @@ Lorry:generate "@lorry.project-compose/containers/bitnami/kafka" {
 }
 
 Lorry:generate "@lorry.project-compose/containers/provectuslabs/kafka-ui" {
-  target = '@',
+  target = '@root',
   variables = KafkaUi
     :from(project, "env-kafka-ui")
     :with_cluster("local", "env-kafka:29092")
@@ -119,7 +119,7 @@ Lorry:generate "@lorry.project-compose/containers/provectuslabs/kafka-ui" {
 }
 
 Lorry:generate "@lorry.project-compose/containers/official/postgres" {
-  target = '@',
+  target = '@root',
   variables = Postgres
     :from(project, "env-postgres")
     :with_datasource(datasource_keycloak)
@@ -133,7 +133,7 @@ Lorry:generate "@lorry.project-compose/containers/official/postgres" {
 }
 
 Lorry:generate "@lorry.project-compose/containers/dpage/pgadmin" {
-  target = '@',
+  target = '@root',
   variables = Pgadmin
     :from(project, "env-pgadmin")
     :with_datasource(datasource_keycloak)
@@ -146,7 +146,7 @@ Lorry:generate "@lorry.project-compose/containers/dpage/pgadmin" {
   }
 
 Lorry:generate "@lorry.project-compose/containers/bitnami/keycloak" {
-  target = '@',
+  target = '@root',
   variables = Keycloak
     :from(project, "env-keycloak")
     :with_datasource(datasource_keycloak)
@@ -159,7 +159,7 @@ Lorry:generate "@lorry.project-compose/containers/bitnami/keycloak" {
 }
 
 Lorry:generate "@lorry.project-compose/containers/bitnami/kcadm" {
-  target = '@',
+  target = '@root',
   variables = Kcadm
     :from(project, "env-kcadm", "application")
     :with_remote(openid_client.url, 'master', user_admin.username, user_admin.password)
@@ -182,7 +182,7 @@ Lorry:generate "@lorry.project-compose/containers/bitnami/kcadm" {
 }
 
 Lorry:generate "@lorry.project-compose/containers/bitnami/minio" {
-  target = '@',
+  target = '@root',
   variables = Minio
     :from(project, "env-minio")
     :with_admin("admin", "admin")
@@ -195,7 +195,7 @@ Lorry:generate "@lorry.project-compose/containers/bitnami/minio" {
 }
 
 Lorry:generate "@lorry.project-compose/containers/bitnami/mcli" {
-  target = '@',
+  target = '@root',
   variables = Mcli
     :from(project, "env-mcli")
     :with_target(minio_client.target_server, "admin", "admin")
@@ -223,7 +223,7 @@ Lorry:generate "@lorry.project-compose/containers/bitnami/mcli" {
 }
 
 Lorry:generate "@lorry.project-compose/containers/official/spring-app" {
-  target = '@',
+  target = '@root',
   variables = SpringApp
     :from(project, 'app-assembly-web', 'store/assembly_web:1.0.0-SNAPSHOT')
     :with_spring_datasource(datasource_app)
@@ -245,13 +245,13 @@ Lorry:generate "@lorry.project-compose/containers/official/spring-app" {
 }
 
 Lorry:generate "@lorry.project-compose/containers/official/nginx-spa" {
-  target = '@',
+  target = '@root',
   variables = NginxSpa
     :from(project, 'app-admin-ui', 'store/admin_ui:1.0.0-SNAPSHOT')
 }
 
 Lorry:generate "@lorry.project-compose/containers/swaggerapi/swagger-ui" {
-  target = '@',
+  target = '@root',
   variables = SwaggerUi
     :from(project, "env-swagger-ui")
     :with_entry("Assembly Web", "http://api.local.example.com/api/assembly_web/v3/api-docs")
@@ -265,7 +265,7 @@ Lorry:generate "@lorry.project-compose/containers/swaggerapi/swagger-ui" {
 }
 
 Lorry:generate "@lorry.project-compose/containers/official/haproxy" {
-  target = '@',
+  target = '@root',
   variables = Haproxy
     :from(project, "env-haproxy")
     :with_arrow('http://kafka-ui.local.example.com', 'http://env-kafka-ui:8080')

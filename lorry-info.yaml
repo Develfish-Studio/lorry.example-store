@@ -6,11 +6,6 @@ publisher: Igor Pavlenko
 license: DEVELFISH-1.0-or-later OR GPL-3.0-or-later
 homepage: https://github.com/Develfish-Studio/lorry.example-store
 version: 0.0.0
-luau:
-  aliases:
-    root: .
-    actions: "@actions"
-    collections: "@collections"
 keywords:
 - compose
 - spring
@@ -28,6 +23,3 @@ dependencies:
     uri: git@github.com:Develfish-Studio/lorry.project-spring.git
   lorry.project-vue:
     uri: git@github.com:Develfish-Studio/lorry.project-vue.git
-targets:
-  '@':
-    path: .
